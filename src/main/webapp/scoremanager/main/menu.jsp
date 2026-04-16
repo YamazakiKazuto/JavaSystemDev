@@ -2,6 +2,10 @@
     pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<c:if test="${empty sessionScope.user}">
+    <c:redirect url="/scoremanager/main/Login.action" />
+</c:if>
+
 <c:import url="/common/base.jsp">
 <c:param name="title">
     得点管理システム
@@ -37,10 +41,6 @@
             <div class="col d-flex align-items-center justify-content-center mx-2 rounded shadow"
                  style="height: 10rem; background-color: #bdb;">
                 <a href="ClassList.action">クラス管理</a>
-            </div>
-            <div class="col d-flex align-items-center justify-content-center mx-2 rounded shadow"
-                 style="height: 10rem; background-color: #bdb;">
-                <a href="Login.action">ログイン</a>
             </div>
             <div class="col d-flex align-items-center justify-content-center mx-2 rounded shadow"
                  style="height: 10rem; background-color: #bdb;">

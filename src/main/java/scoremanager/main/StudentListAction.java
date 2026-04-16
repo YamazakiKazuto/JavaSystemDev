@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import bean.School;
 import bean.Student;
 import bean.Teacher;
 import dao.ClassNumDao;
@@ -26,16 +25,6 @@ public class StudentListAction extends Action {
         // セッションからログインユーザー取得
         Teacher teacher = (Teacher) session.getAttribute("user");
         
-        if (teacher == null) {
-            teacher = new Teacher();
- 
-            School school = new School();
-            school.setCd("tes");   // ← 実在する学校コードに変更
- 
-            teacher.setSchool(school);
- 
-            session.setAttribute("user", teacher);
-        }
         
         // リクエストパラメータ
         String entYearStr = "";

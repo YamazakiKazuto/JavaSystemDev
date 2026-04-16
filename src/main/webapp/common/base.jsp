@@ -14,6 +14,17 @@
 	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
 	crossorigin="anonymous">
 <title>${param.title}</title>
+<c:choose>
+			<%-- ログイン済みの場合 --%>
+	 <c:when test="${not empty user}">
+		<p>ログイン中 : ${user.name} さん</p>
+	</c:when>
+	<%-- 未ログインの場合 --%>
+	<c:otherwise>
+		<p>未ログイン</p>
+	</c:otherwise>
+</c:choose>
+
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 ${param.scripts}
 </head>
@@ -27,11 +38,13 @@ ${param.scripts}
 		<div class="row justify-content-center">
 			<c:choose>
 				<%-- ログイン済みの場合 --%>
-				<c:when test="${user.isAuthenticated()}">
-					<nav class="col-3" style="height:40rem;">
+				 <c:when test="${not empty user}">
+<%-- 			<nav class="col-3" style="height:40rem;">
 						<c:import url="/common/navigation.jsp" />
 					</nav>
+--%>
 					<main class="col-9 border-start"> ${param.content} </main>
+
 				</c:when>
 				<%-- 未ログインの場合 --%>
 				<c:otherwise>
