@@ -157,4 +157,26 @@ public class SubjectDao extends Dao {
             }
         }
     }
+    public boolean delete(String cd, String schoolCd) throws Exception {
+        Connection connection = getConnection();
+        PreparedStatement statement = null;
+        String sql = "delete from subject where cd=? and school_cd=?";
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, cd);
+            statement.setString(2, schoolCd);
+            int result = statement.executeUpdate();
+            return result > 0;
+ 
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            if (statement != null) {
+                try { statement.close(); } catch (SQLException sqle) { throw sqle; }
+            }
+            if (connection != null) {
+                try { connection.close(); } catch (SQLException sqle) { throw sqle; }
+            }
+        }
+    }
 }
