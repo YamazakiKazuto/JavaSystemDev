@@ -22,7 +22,8 @@ public class SubjectDao extends Dao {
         Connection connection = getConnection();
         PreparedStatement statement = null;
         ResultSet rSet = null;
-
+        
+        
         String sql = baseSql + " and cd=?";
 
         try {
