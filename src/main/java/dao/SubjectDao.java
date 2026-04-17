@@ -15,31 +15,30 @@ public class SubjectDao extends Dao {
     private String baseSql = "select * from subject where school_cd=? ";
 
     // 主キーで1件取得
-    public Subject get(String cd) throws Exception {
-
+    public Subject get(String cd, String schoolCd) throws Exception {
+    	 
         Subject subject = null;
-
+ 
         Connection connection = getConnection();
         PreparedStatement statement = null;
         ResultSet rSet = null;
-        
-        
+ 
         String sql = baseSql + " and cd=?";
-
+ 
         try {
             statement = connection.prepareStatement(sql);
-            statement.setString(1, cd);  // school_cd
-            statement.setString(2, cd);  // subject cd
-
+            statement.setString(1, schoolCd);
+            statement.setString(2, cd);
+ 
             rSet = statement.executeQuery();
-
+ 
             if (rSet.next()) {
                 subject = new Subject();
                 subject.setCd(rSet.getString("cd"));
                 subject.setName(rSet.getString("name"));
                 subject.setSchoolCd(rSet.getString("school_cd"));
             }
-
+ 
         } catch (Exception e) {
             throw e;
         } finally {
@@ -50,7 +49,7 @@ public class SubjectDao extends Dao {
                 try { connection.close(); } catch (SQLException sqle) { throw sqle; }
             }
         }
-
+ 
         return subject;
     }
 
@@ -117,14 +116,15 @@ public class SubjectDao extends Dao {
         Connection connection = getConnection();
         PreparedStatement statement = null;
 
+
         // 既存チェック
-        Subject old = get(subject.getCd());
+        Subject old = get(subject.getCd(),subject.getSchoolCd());
 
         String sql;
 
         if (old == null) {
             // INSERT
-            sql = "insert into subject(cd, name, school_cd) values(?, ?, ?)";
+            sql = "insert into subject(school_cd,cd, name) values(?, ?, ?)";
         } else {
             // UPDATE
             sql = "update subject set name=?, school_cd=? where cd=?";
@@ -134,9 +134,9 @@ public class SubjectDao extends Dao {
             statement = connection.prepareStatement(sql);
 
             if (old == null) {
-                statement.setString(1, subject.getCd());
-                statement.setString(2, subject.getName());
-                statement.setString(3, subject.getSchoolCd());
+                statement.setString(1, subject.getSchoolCd());
+                statement.setString(2, subject.getCd());
+                statement.setString(3, subject.getName());
             } else {
                 statement.setString(1, subject.getName());
                 statement.setString(2, subject.getSchoolCd());
