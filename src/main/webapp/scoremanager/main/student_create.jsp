@@ -1,13 +1,14 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>学生新規登録</title>
-</head>
-<body>
+<c:import url="/common/base.jsp">
+<c:param name="title">
+    得点管理システム
+</c:param>
+
+<c:param name="scripts"></c:param>
+
+<c:param name="content">
 
 <h2>学生新規登録</h2>
 
@@ -50,14 +51,11 @@
     </p>
 
     <p>
-        <input type="submit" value="登録">
+        <input type="submit" value="登録"><a href="StudentList.action" style="margin-left: 15px;">戻る</a>
     </p>
-    <br>
-    <p>
-        <a href="StudentList.action">戻る</a>
-    </p>
+    
 
 </form>
 
-</body>
-</html>
+</c:param>
+</c:import>

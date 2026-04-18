@@ -1,17 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>登録完了 - 得点管理システム</title>
-    <%-- 必要に応じてBootstrapなどのCSSを読み込んでください --%>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <%-- 共通ヘッダーの取り込み --%>
-    <c:import url="/common/header.jsp" />
+<c:import url="/common/base.jsp">
+<c:param name="title">
+    得点管理システム
+</c:param>
+
+<c:param name="scripts"></c:param>
+
+<c:param name="content">
 
     <div class="container mt-5">
         <div class="card shadow-sm">
@@ -33,7 +30,5 @@
         </div>
     </div>
 
-    <%-- 共通フッターの取り込み（もしあれば） --%>
-    <c:import url="/common/footer.jsp" />
-</body>
-</html>
+</c:param>
+</c:import>

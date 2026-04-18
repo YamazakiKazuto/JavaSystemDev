@@ -1,50 +1,37 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
-<html>
-<head>
-    <title>科目変更</title>
-</head>
-<body>
+<c:import url="/common/base.jsp">
+<c:param name="title">
+    得点管理システム
+</c:param>
 
-<h2>科目変更</h2>
+<c:param name="scripts"></c:param>
 
-<!-- ▼ エラーメッセージ表示 -------------------------------------------- -->
-<c:if test="${not empty errors}">
-    <div style="color:red;">
-        <ul>
-            <c:forEach var="e" items="${errors}">
-                <li>${e.value}</li>
-            </c:forEach>
-        </ul>
-    </div>
-</c:if>
-<!-- ▲ エラーメッセージ表示 -------------------------------------------- -->
+<c:param name="content">
+
+<h2>科目情報更新</h2>
 
 <form action="SubjectUpdateExecute.action" method="post">
 
-    <table border="1" cellpadding="5">
-        <tr>
-            <th>科目コード</th>
-            <td>
-                <input type="text" name="cd" value="${subject.cd}" />
-            </td>
-        </tr>
+    <p>
+        科目ID： ${subject.cd}
+        <input type="hidden" name="cd" value="${subject.cd}">
+    </p>
 
-        <tr>
-            <th>科目名</th>
-            <td>
-                <input type="text" name="name" value="${subject.name}" />
-            </td>
-        </tr>
-    </table>
+   
+    <p>
+        科目名：
+        <input type="text" name="name"
+               value="${subject.name}" required>
+    </p>
 
-    <br>
+    <p>
+        <input type="submit" value="更新"><a href="SubjectList.action" style="margin-left: 15px;">戻る</a>
+    </p>
 
-    <input type="submit" value="変更する" />
-    <input type="button" value="戻る" onclick="location.href='SubjectList.action'" />
 
 </form>
 
-</body>
-</html>
+</c:param>
+</c:import>

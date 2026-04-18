@@ -1,6 +1,15 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+
+<c:import url="/common/base.jsp">
+<c:param name="title">
+    得点管理システム
+</c:param>
+
+<c:param name="scripts"></c:param>
+
+<c:param name="content">
 <form action="SubjectCreateExecute.action" method="post">
     <%-- エラーメッセージの表示 --%>
     <c:if test="${not empty error}">
@@ -22,3 +31,6 @@
     <button type="submit" class="btn btn-primary">登録</button>
     <a href="SubjectList.action" class="btn btn-secondary">キャンセル</a>
 </form>
+
+</c:param>
+</c:import>

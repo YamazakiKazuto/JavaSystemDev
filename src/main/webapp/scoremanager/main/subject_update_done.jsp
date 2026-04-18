@@ -1,28 +1,22 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
-<html>
-<head>
-    <title>科目変更完了</title>
-</head>
-<body>
+<c:import url="/common/base.jsp">
+<c:param name="title">
+    得点管理システム
+</c:param>
+
+<c:param name="scripts"></c:param>
+
+<c:param name="content">
 
 <h2>科目の変更が完了しました</h2>
-
-<table border="1" cellpadding="5">
-    <tr>
-        <th>科目コード</th>
-        <td>${subject.cd}</td>
-    </tr>
-    <tr>
-        <th>科目名</th>
-        <td>${subject.name}</td>
-    </tr>
-</table>
-
+<p>更新後の情報は下記になります</p>
+<p>    科目コード　:　${subject.cd}</p>
+<p>    科目名　　:　${subject.name}</p>
 <br>
 
-<input type="button" value="科目一覧へ戻る" onclick="location.href='SubjectList.action'" />
+<a href="SubjectList.action">科目一覧画面に戻る</a>
 
-</body>
-</html>
+</c:param>
+</c:import>

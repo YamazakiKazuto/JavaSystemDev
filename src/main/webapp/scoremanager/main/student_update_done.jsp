@@ -1,12 +1,15 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>学生情報更新完了</title>
-</head>
-<body>
+
+<c:import url="/common/base.jsp">
+<c:param name="title">
+    得点管理システム
+</c:param>
+
+<c:param name="scripts"></c:param>
+
+<c:param name="content">
 
 <h2>学生情報更新完了</h2>
 
@@ -15,8 +18,8 @@
 </p>
 
 <p>
-    <a href="Menu.action">メニュー画面に戻る</a>
+    <a href="StudentList.action">学生一覧画面に戻る</a>
 </p>
 
-</body>
-</html>
+</c:param>
+</c:import>

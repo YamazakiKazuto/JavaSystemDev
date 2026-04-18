@@ -14,16 +14,6 @@
 	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
 	crossorigin="anonymous">
 <title>${param.title}</title>
-<c:choose>
-			<%-- ログイン済みの場合 --%>
-	 <c:when test="${not empty user}">
-		<p>ログイン中 : ${user.name} さん</p>
-	</c:when>
-	<%-- 未ログインの場合 --%>
-	<c:otherwise>
-		<p>未ログイン</p>
-	</c:otherwise>
-</c:choose>
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 ${param.scripts}
@@ -52,6 +42,7 @@ ${param.scripts}
 				</c:otherwise>
 			</c:choose>
 		</div>
+		<a href="Menu.action"" style="margin-left: 30px;">メニュー画面へ</a>
 		<footer class="py-2 my-4 bg-dark bg-opacity-10 border-top border-3 align-bottom">
 			<c:import url="/common/footer.jsp" />
 		</footer>

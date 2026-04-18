@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
 <c:if test="${empty sessionScope.user}">
     <c:redirect url="/scoremanager/main/Login.action" />
@@ -42,10 +42,7 @@
                  style="height: 10rem; background-color: #bdb;">
                 <a href="ClassList.action">クラス管理</a>
             </div>
-            <div class="col d-flex align-items-center justify-content-center mx-2 rounded shadow"
-                 style="height: 10rem; background-color: #bdb;">
-                <a href="Logout.action">ログアウト</a>
-            </div>
+
         </div>
     </section>
 </c:param>
