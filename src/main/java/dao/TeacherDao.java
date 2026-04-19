@@ -32,7 +32,7 @@ public class TeacherDao extends Dao {
                     // --- Schoolオブジェクトのセット ---
                     School school = new School();
                     school.setCd(rs.getString("school_cd")); 
-                    // school.setName(...) などが必要な場合は、ここで別途取得か結合SQLが必要です
+
                     teacher.setSchool(school);
                 }
             }

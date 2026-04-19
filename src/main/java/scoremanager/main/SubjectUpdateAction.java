@@ -15,12 +15,12 @@ public class SubjectUpdateAction extends Action {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         HttpSession session = request.getSession();
-        Teacher teacher = (Teacher) session.getAttribute("user");
-        String school_cd= teacher.getSchool().getCd();
+        Teacher user = (Teacher) session.getAttribute("user");
         String cd=request.getParameter("cd");
+        
         SubjectDao subdao =new SubjectDao();
         //daoでidに合致する番号をとる
-        Subject subject=subdao.get(cd,school_cd);
+        Subject subject=subdao.get(cd,user.getSchool());
         request.setAttribute("subject",subject);
         
         request.getRequestDispatcher("subject_update.jsp")

@@ -28,7 +28,7 @@ public class SubjectDeleteAction extends Action {
 
         Subject subject = null;
         if (teacher != null && cd != null) {
-                   subject = sDao.get(cd, teacher.getSchool().getCd());
+                   subject = sDao.get(cd, teacher.getSchool());
         }
 
        

@@ -22,19 +22,19 @@
 
     <!-- 学校（更新不可） -->
     <p>
-        学校： ${student.school}
+        学校： ${student.school.name}
     </p>
     
         <!-- 氏名（更新可） -->
     <p>
-        氏名：<br>
+        氏名：
         <input type="text" name="name"
                value="${student.name}" required>
     </p>
 
     <!-- クラス（更新可） -->
     <p>
-        クラス：<br>
+        クラス：
         <select name="class_num">
             <c:forEach var="cn" items="${classnum}">
                 <option value="${cn}"
@@ -49,7 +49,7 @@
 
     <!-- 在学中フラグ（更新可） -->
     <p>
-        在学状況：<br>
+        在学状況<br>
         <label>
             <input type="radio" name="is_enrolled" value="true"
                 <c:if test="${student.attend}">

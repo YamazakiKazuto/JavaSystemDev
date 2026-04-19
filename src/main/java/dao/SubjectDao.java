@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import bean.School;
 import bean.Subject;
 
 public class SubjectDao extends Dao {
@@ -15,7 +16,7 @@ public class SubjectDao extends Dao {
     private String baseSql = "select * from subject where school_cd=? ";
 
     // 主キーで1件取得
-    public Subject get(String cd, String schoolCd) throws Exception {
+    public Subject get(String cd, School school) throws Exception {
     	 
         Subject subject = null;
  
@@ -27,7 +28,7 @@ public class SubjectDao extends Dao {
  
         try {
             statement = connection.prepareStatement(sql);
-            statement.setString(1, schoolCd);
+            statement.setString(1, school.getCd());
             statement.setString(2, cd);
  
             rSet = statement.executeQuery();
@@ -36,7 +37,7 @@ public class SubjectDao extends Dao {
                 subject = new Subject();
                 subject.setCd(rSet.getString("cd"));
                 subject.setName(rSet.getString("name"));
-                subject.setSchoolCd(rSet.getString("school_cd"));
+                subject.setSchool(school);
             }
  
         } catch (Exception e) {
@@ -54,31 +55,10 @@ public class SubjectDao extends Dao {
     }
 
     // ResultSet → List<Subject> 変換
-    private List<Subject> postFilter(ResultSet rSet) throws Exception {
-
-        List<Subject> list = new ArrayList<>();
-
-        try {
-            while (rSet.next()) {
-
-                Subject subject = new Subject();
-
-                subject.setCd(rSet.getString("cd"));
-                subject.setName(rSet.getString("name"));
-                subject.setSchoolCd(rSet.getString("school_cd"));
-
-                list.add(subject);
-            }
-
-        } catch (SQLException | NullPointerException e) {
-            e.printStackTrace();
-        }
-
-        return list;
-    }
+    
 
     // 学校コードで絞り込み
-    public List<Subject> filter(String schoolCd) throws Exception {
+    public List<Subject> filter(School school) throws Exception {
 
         List<Subject> list = new ArrayList<>();
 
@@ -88,37 +68,38 @@ public class SubjectDao extends Dao {
 
         String order = " order by cd asc";
 
-        try {
-            statement = connection.prepareStatement(baseSql + order);
-            statement.setString(1, schoolCd);
+        
+        statement = connection.prepareStatement(baseSql + order);
+        statement.setString(1, school.getCd());
+        rSet = statement.executeQuery();
+        while (rSet.next()) {
 
-            rSet = statement.executeQuery();
+            Subject subject = new Subject();
 
-            list = postFilter(rSet);
+            subject.setCd(rSet.getString("cd"));
+            subject.setName(rSet.getString("name"));
+            subject.setSchool(school);
 
-        } catch (Exception e) {
-            throw e;
-        } finally {
-            if (statement != null) {
-                try { statement.close(); } catch (SQLException sqle) { throw sqle; }
-            }
-            if (connection != null) {
-                try { connection.close(); } catch (SQLException sqle) { throw sqle; }
-            }
+            list.add(subject);
         }
 
+	    rSet.close();
+	    statement.close();
+	    connection.close();
+	    
         return list;
     }
 
     // 保存（insert or update）
     public boolean save(Subject subject) throws Exception {
+    	
 
         Connection connection = getConnection();
         PreparedStatement statement = null;
 
 
         // 既存チェック
-        Subject old = get(subject.getCd(),subject.getSchoolCd());
+        Subject old = get(subject.getCd(),subject.getSchool());
 
         String sql;
 
@@ -127,20 +108,21 @@ public class SubjectDao extends Dao {
             sql = "insert into subject(school_cd,cd, name) values(?, ?, ?)";
         } else {
             // UPDATE
-            sql = "update subject set name=?, school_cd=? where cd=?";
+            sql = "update subject set name=?, school_cd=? where cd=? and school_cd=?";
         }
 
         try {
             statement = connection.prepareStatement(sql);
 
             if (old == null) {
-                statement.setString(1, subject.getSchoolCd());
+                statement.setString(1, subject.getSchool().getCd());
                 statement.setString(2, subject.getCd());
                 statement.setString(3, subject.getName());
             } else {
                 statement.setString(1, subject.getName());
-                statement.setString(2, subject.getSchoolCd());
+                statement.setString(2, subject.getSchool().getCd());
                 statement.setString(3, subject.getCd());
+                statement.setString(4, subject.getSchool().getCd());
             }
 
             int result = statement.executeUpdate();

@@ -16,13 +16,12 @@ public class SubjectUpdateExecuteAction extends Action {
 
         // リクエストパラメータ取得
     	HttpSession session = request.getSession();
-    	Teacher teacher = (Teacher) session.getAttribute("user");
-        String school_cd= teacher.getSchool().getCd();
+    	Teacher user = (Teacher) session.getAttribute("user");
         String cd = request.getParameter("cd");
         String name = request.getParameter("name");
         
         SubjectDao dao = new SubjectDao();
-        Subject subject = dao.get(cd,school_cd);
+        Subject subject = dao.get(cd,user.getSchool());
 
         // 更新対象のみセット
         subject.setName(name);

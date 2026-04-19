@@ -17,7 +17,7 @@ public class Subject implements Serializable {
     /**
      * 学校コード：String
      */
-    private String schoolCd;
+    private School school;
 
     /**
      * ゲッタ・セッタ
@@ -38,11 +38,11 @@ public class Subject implements Serializable {
         this.name = name;
     }
 
-    public String getSchoolCd() {
-        return schoolCd;
+    public School getSchool() {
+        return school;
     }
 
-    public void setSchoolCd(String schoolCd) {
-        this.schoolCd = schoolCd;
+    public void setSchool(School school) {
+        this.school = school;
     }
 }

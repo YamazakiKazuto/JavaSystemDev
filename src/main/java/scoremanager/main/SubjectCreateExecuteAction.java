@@ -41,7 +41,7 @@ public class SubjectCreateExecuteAction extends Action {
 //            url = "subject_create.jsp";
 //        }
 
-        Subject existing = sDao.get(subjectCd,user.getSchool().getCd());
+        Subject existing = sDao.get(subjectCd,user.getSchool());
         System.out.println(existing);
         if (existing != null) {
             request.setAttribute("error", "科目コードが重複しています。");
@@ -53,7 +53,7 @@ public class SubjectCreateExecuteAction extends Action {
         Subject subject = new Subject();
         subject.setCd(subjectCd);
         subject.setName(subjectName);
-        subject.setSchoolCd(user.getSchool().getCd());
+        subject.setSchool(user.getSchool());
         sDao.save(subject);
         
 

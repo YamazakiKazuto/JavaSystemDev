@@ -14,7 +14,6 @@
 <p>更新後の情報は下記になります</p>
 <p>    科目コード　:　${subject.cd}</p>
 <p>    科目名　　:　${subject.name}</p>
-<br>
 
 <a href="SubjectList.action">科目一覧画面に戻る</a>
 

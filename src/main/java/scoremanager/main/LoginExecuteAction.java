@@ -26,6 +26,7 @@ public class LoginExecuteAction extends Action {
    		        response.sendRedirect(request.getContextPath() + "/scoremanager/main/Menu.action");	
   			}
    			else if(user == null) {
+   				request.setAttribute("error","IDまたはパスワードが確認できませんでした");
    				request.getRequestDispatcher("login.jsp")
                 .forward(request, response);
    			}

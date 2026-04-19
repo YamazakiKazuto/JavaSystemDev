@@ -6,8 +6,8 @@
     <h2>ログイン</h2>
 
     <%-- ログイン失敗時のエラーメッセージ表示 --%>
-    <c:if test="${not empty errors}">
-        <p style="color: red;">${errors}</p>
+    <c:if test="${not empty error}">
+        <p style="color: red;">${error}</p>
     </c:if>
 
     <%-- actionを LoginExecute.action に変更 --%>

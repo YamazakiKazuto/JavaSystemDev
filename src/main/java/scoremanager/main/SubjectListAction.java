@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import bean.School;
 import bean.Subject;
 import bean.Teacher;
 import dao.SubjectDao;
@@ -23,13 +22,6 @@ public class SubjectListAction extends Action {
         // --- 1. ログインチェック（Teacher をセッションから取得） ---
         Teacher teacher = (Teacher) session.getAttribute("user");
 
-        if (teacher == null) {
-            teacher = new Teacher();
-            School school = new School();
-            school.setCd("tes");   // ← 実在する学校コードに変更
-            teacher.setSchool(school);
-            session.setAttribute("user", teacher);
-        }
 
         // --- 2. パラメータ取得（科目は絞り込み条件が少ない） ---
         String isAttendStr = request.getParameter("f1");  // 在学フラグ（必要なら）
@@ -39,11 +31,8 @@ public class SubjectListAction extends Action {
 
         SubjectDao sDao = new SubjectDao();
         Map<String, String> errors = new HashMap<>();
-
-        // --- 3. データ取得（SubjectDao に合わせて filter を呼ぶ） ---
-        if (teacher != null) {
-            subjects = sDao.filter(teacher.getSchool().getCd());
-        }
+        subjects = sDao.filter(teacher.getSchool());
+        
 
         // --- 4. セット ---
         request.setAttribute("f1", isAttendStr);

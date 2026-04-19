@@ -23,8 +23,7 @@ public class StudentDao extends Dao {
 
 	    Connection con = getConnection();
 	    PreparedStatement st = con.prepareStatement(
-	        "select * from STUDENT where NO = ?"
-	    );
+	        "SELECT st.no,st.name,st.ent_year,st.class_num,st.is_attend,st.school_cd,sc.name as school_name FROM student as st LEFT JOIN school as sc ON st.school_cd = sc.cd WHERE no = ?");
 	    st.setInt(1, student_id);
 
 	    ResultSet rs = st.executeQuery();
@@ -39,8 +38,8 @@ public class StudentDao extends Dao {
             student.setClassNum(rs.getString("class_num"));
             student.setAttend(rs.getBoolean("is_attend"));
             
-            String str_school= rs.getString("school_cd");
-            school.setCd(str_school);
+            school.setCd(rs.getString("school_cd"));
+            school.setName(rs.getString("school_name"));
             student.setSchool(school);
         }
 
