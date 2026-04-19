@@ -24,7 +24,7 @@ public class SubjectListAction extends Action {
 
 
         // --- 2. パラメータ取得（科目は絞り込み条件が少ない） ---
-        String isAttendStr = request.getParameter("f1");  // 在学フラグ（必要なら）
+        String isAttendStr = request.getParameter("f1");  // 在学フラグ（必要なら）あ
         boolean isAttend = (isAttendStr != null);
 
         List<Subject> subjects = null;
