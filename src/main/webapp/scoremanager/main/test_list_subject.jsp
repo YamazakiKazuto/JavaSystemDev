@@ -10,7 +10,7 @@
 
 <c:param name="content">
 
-<h2 style="text-align:center;">学生別成績一覧</h2>
+<h2 style="text-align:center;">クラス・科目別成績一覧</h2>
 
 <c:choose>
 
@@ -23,19 +23,23 @@
     </c:when>
 
     <c:otherwise>
-        <table border='1' style="margin-left: 250px; border-collapse: separate; border-spacing: 50px 5px;">
+        <table border='1' style="margin-left: 170px; border-collapse: separate; border-spacing: 50px 5px;">
             <tr>
-            <th>科目コード</th>
-            <th>科目名</th>
+             <th>クラス</th>
+            <th>科目</th>
+            <th>学生番号</th>
+            <th>名前</th>
             <th>n回目</th>
             <th>点数</th>
             </tr>
 
-            <c:forEach var="t" items="${tesstu}">
+            <c:forEach var="t" items="${tescla}">
                 <tr>
-                	<td>${t.subjectCd}</td>
-                    <td>${t.subjectName}</td>
-                    <td>${t.num}</td>
+                    <td>${t.classNum}</td>
+                    <td>${t.subject.cd}</td>
+                	<td>${t.student.no}</td>
+                    <td>${t.student.name}</td>
+                    <td>${t.no}</td>
                     <td>${t.point}</td>
                 </tr>
             </c:forEach>

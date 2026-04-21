@@ -17,7 +17,7 @@ public class TestListSubjectDao extends Dao {
         "select s.no as student_no, s.name as student_name, " +
         "s.class_num, t.no, t.point " +
         "from test t " +
-        "join student s on t.student_no = s.no ";
+        "left join student s on t.student_no = s.no ";
 
     /**
      * ResultSet → List<TestListSubject>
@@ -71,6 +71,7 @@ public class TestListSubjectDao extends Dao {
             "order by s.no"
         );
 
+        
         ps.setString(1, school.getCd());
         ps.setInt(2, entYear);
         ps.setString(3, classNum);

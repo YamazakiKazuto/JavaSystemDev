@@ -46,12 +46,15 @@ public class TestListStudentExecuteAction extends Action {
         
         if (tesstu != null && tesstu.isEmpty()) {
             request.setAttribute("error", "成績情報が存在しませんでした");
+            session.removeAttribute("classList");
+            session.removeAttribute("subjectlist");
             request.getRequestDispatcher("test_list_student.jsp")
                    .forward(request, response);
-            return;
+
         }
         request.setAttribute("tesstu", tesstu);
-
+        session.removeAttribute("classList");
+        session.removeAttribute("subjectlist");
         request.getRequestDispatcher("test_list_student.jsp")
         .forward(request, response);
     }

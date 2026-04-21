@@ -29,8 +29,8 @@ public class TestListAction extends Action {
         SubjectDao subjectDao = new SubjectDao();
         List<Subject> subjectList = subjectDao.filter(school);
 
-        request.setAttribute("classList", classList);
-        request.setAttribute("subjectList", subjectList);
+        session.setAttribute("classlist", classList);
+        session.setAttribute("subjectlist", subjectList);
 
         request.getRequestDispatcher("test_list.jsp")
         .forward(request, response);
