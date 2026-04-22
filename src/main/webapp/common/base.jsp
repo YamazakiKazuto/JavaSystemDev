@@ -20,33 +20,47 @@ ${param.scripts}
 </head>
 <body>
 	<div id="wrapper" class="container">
-		<header
-			class="d-flex flex-wrap justify-content-center py-3 px-5 mb-4 border-bottom border-2 bg-primary bg-opacity-10 bg-gradient">
-			<c:import url="/common/header.jsp" />
-		</header>
 
-		<div class="row justify-content-center">
-			<c:choose>
-				<%-- ログイン済みの場合 --%>
-				 <c:when test="${not empty user}">
-<%-- 			<nav class="col-3" style="height:40rem;">
-						<c:import url="/common/navigation.jsp" />
-					</nav>
---%>
-					<main class="col-9 border-start"> ${param.content} </main>
+    <!-- ヘッダー -->
+    <header
+        class="d-flex flex-wrap justify-content-center py-3 px-5 mb-4
+               border-bottom border-2 bg-primary bg-opacity-10 bg-gradient">
+        <c:import url="/common/header.jsp" />
+    </header>
 
-				</c:when>
-				<%-- 未ログインの場合 --%>
-				<c:otherwise>
-					<main class="col-8"> ${param.content} </main>
-				</c:otherwise>
-			</c:choose>
-		</div>
-		<a href="Menu.action"" style="margin-left: 30px;">メニュー画面へ</a>
-		<footer class="py-2 my-4 bg-dark bg-opacity-10 border-top border-3 align-bottom">
-			<c:import url="/common/footer.jsp" />
-		</footer>
+    <!-- メインレイアウト -->
+    <div class="row">
 
-	</div>
+        <!-- 左メニュー -->
+        <aside class="col-3 sidebar">
+    		<p><a href="Menu.action">メニュー画面</a></p>
+            <p><a href="StudentList.action">学生管理</a></p>
+            <p>成績管理</p>
+            <p><a href="TestRegist.action" style="margin-left: 15px;">成績登録</a></p>
+            <p><a href="TestList.action" style="margin-left: 20px;">成績参照</a></p>
+            <p><a href="SubjectList.action">科目管理</a></p>
+    	</aside>
+
+        <!-- 右コンテンツ -->
+        <main class="col-9 border-start">
+            <c:choose>
+                <c:when test="${not empty user}">
+                    ${param.content}
+                </c:when>
+                <c:otherwise>
+                    ${param.content}
+                </c:otherwise>
+            </c:choose>
+        </main>
+
+    </div>
+
+    <!-- フッター -->
+    <footer class="py-2 my-4 bg-dark bg-opacity-10 border-top border-3">
+        <c:import url="/common/footer.jsp" />
+    </footer>
+
+</div>
+``
 </body>
 </html>

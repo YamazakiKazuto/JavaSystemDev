@@ -37,7 +37,7 @@
     <div class="col-md-2">
         <label class="form-label">入学年度</label>
         <select name="ent_year" class="form-select">
-            <option value="0">--------</option>
+            <option value="">--------</option>
             <c:forEach var="year" items="${ent_years}">
                 <option value="${year}" ${year == ent_year ? 'selected' : ''}>${year}</option>
             </c:forEach>
@@ -131,8 +131,7 @@
                     <input type="number"
                            name="point"
                            value="${t.point}"
-                           class="form-control"
-                           min="0" max="100">
+                           class="form-control">
                 </td>
             </tr>
         </c:forEach>

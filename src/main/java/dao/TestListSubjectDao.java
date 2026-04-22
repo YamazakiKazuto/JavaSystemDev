@@ -15,7 +15,7 @@ public class TestListSubjectDao extends Dao {
 
     private String baseSql =
         "select s.no as student_no, s.name as student_name, " +
-        "s.class_num, t.no, t.point " +
+        "s.class_num,s.ent_year, t.no, t.point " +
         "from test t " +
         "left join student s on t.student_no = s.no ";
 
@@ -35,6 +35,7 @@ public class TestListSubjectDao extends Dao {
             Student student = new Student();
             student.setNo(rs.getString("student_no"));
             student.setName(rs.getString("student_name"));
+            student.setEntYear(rs.getInt("ent_year"));
             tls.setStudent(student);
 
             // class

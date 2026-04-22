@@ -24,14 +24,21 @@
 
         <div class="mb-3">
         	<label for="cd" class="form-label">ユーザID</label>
-        	<%-- value属性に ${cd} をセット --%>
-        	<input type="text" name="id" class="form-control" required>
+        	
+        	<input type="text" name="id" 
+        	<c:if test="${not empty returnid}"> 	
+   				value="${returnid }" 
+			</c:if>
+        	class="form-control" required>
     	</div>
+    	
 
         <div class="mb-3">
         	<label for="name" class="form-label">パスワード</label>
-        	<%-- value属性に ${name} をセット --%>
-        	<input type="password" name="password" id="password" class="form-control" required>
+        	
+        	<input type="password" id="password" name="password"
+       			value="${not empty returnpassword ? returnpassword : ''}"
+       			class="form-control" required>
         	<div class="d-flex justify-content-center mt-2">
         		<input class="form-check-input" type="checkbox" id="showPassword" onclick="togglePassword()">
         		<label class="form-check-label" for="showPassword">
@@ -39,6 +46,7 @@
         		</label>
     		</div>
    	 	</div>
+    	
     	
     	<script>	
 			function togglePassword() {

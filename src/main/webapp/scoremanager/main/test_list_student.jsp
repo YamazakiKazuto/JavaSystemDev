@@ -80,6 +80,25 @@
 </c:if>
 
 
+<table class="table table-hover">
+    <tr>
+        <th style="width: 40%;">科目名</th>
+        <th>科目コード</th>
+        <th>回数</th>
+        <th>点数</th>
+    </tr>
+
+    <c:forEach var="t" items="${tesstu}">
+        <tr>
+            <td style="width: 40%;">${t.subjectName}</td>
+            <td>${t.subjectCd}</td>
+            <td>${t.num}</td>
+            <td>${t.point}</td>
+        </tr>
+    </c:forEach>
+</table>
+
+
 
 
 </c:param>

@@ -85,26 +85,42 @@
 </c:when>
 
 <c:otherwise>
-    <table border='1' style="margin-left: 170px; border-collapse: separate; border-spacing: 50px 5px;">
+    <table  class="table table-hover" ">
         <tr>
+        <th>入学年度</th>
         <th>クラス</th>
-        <th>科目</th>
         <th>学生番号</th>
-        <th>名前</th>
-        <th>n回目</th>
-        <th>点数</th>
+        <th>氏名</th>
+        <th>１回</th>
+        <th>２回</th>
         </tr>
 
         <c:forEach var="t" items="${tescla}">
-            <tr>
-                <td>${t.classNum}</td>
-                <td>${t.subject.cd}</td>
-             	<td>${t.student.no}</td>
-                <td>${t.student.name}</td>
-                <td>${t.no}</td>
-                <td>${t.point}</td>
-            </tr>
-        </c:forEach>
+    <c:if test="${t.no == 1}">
+        <tr>
+            <td>${t.student.entYear}</td>
+            <td>${t.classNum}</td>
+            <td>${t.student.no}</td>
+            <td>${t.student.name}</td>
+            <td>${t.point}</td>
+
+            <!-- 2回目の点数を探す -->
+            <td>
+                <c:set var="second" value="-" />
+
+                <c:forEach var="u" items="${tescla}">
+                    <c:if test="${u.student.no == t.student.no 
+                                 and u.classNum == t.classNum
+                                 and u.no == 2}">
+                        <c:set var="second" value="${u.point}" />
+                    </c:if>
+                </c:forEach>
+
+                ${second}
+            </td>
+        </tr>
+    </c:if>
+</c:forEach>
     </table>
 </c:otherwise>
 
