@@ -1,5 +1,7 @@
 package scoremanager.main;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import bean.School;
@@ -28,7 +30,14 @@ public class TestListAction extends Action {
         // 科目一覧取得
         SubjectDao subjectDao = new SubjectDao();
         List<Subject> subjectList = subjectDao.filter(school);
-
+        
+        LocalDate todaysDate = LocalDate.now();
+        int year = todaysDate.getYear();
+        List<Integer> entYearSet = new ArrayList<>();
+        for (int i = year - 10; i <= year + 1; i++) {
+            entYearSet.add(i);
+        }
+        session.setAttribute("entyearset", entYearSet);
         session.setAttribute("classlist", classList);
         session.setAttribute("subjectlist", subjectList);
 

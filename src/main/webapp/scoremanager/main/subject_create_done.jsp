@@ -10,25 +10,16 @@
 
 <c:param name="content">
 
-    <div class="container mt-5">
-        <div class="card shadow-sm">
-            <div class="card-body text-center">
-                <h2 class="text-success mb-4">登録が完了しました</h2>
-                
-                <p class="mb-4">
-                    新しい科目の登録が正常に終了しました。<br>
-                    登録した内容は科目一覧画面から確認できます。
-                </p>
-
-                <%-- 次の画面（一覧）へ戻るボタン --%>
-                <div class="d-grid gap-2 d-md-block">
-                    <a href="SubjectList.action" class="btn btn-primary px-5">
-                        科目一覧へ戻る
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
+<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">成績管理</h2>
+	<div style="background-color: #8fc1a9; color: #034732; padding: 8px 16px;
+    	border-radius: 4px; text-align: center; ">
+    	登録が完了しました
+	</div>
+<br>
+<br>
+ 
+  <a href="SubjectCreate.action">戻る</a>
+ <a href="SubjectList.action" style="margin-left: 30px;" >科目一覧</a>
+  
 </c:param>
 </c:import>

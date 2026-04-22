@@ -1,4 +1,5 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
 <c:import url="/common/base.jsp">
@@ -10,17 +11,15 @@
 
 <c:param name="content">
 
-<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">成績管理</h2>
+	<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">成績管理</h2>
 	<div style="background-color: #8fc1a9; color: #034732; padding: 8px 16px;
     	border-radius: 4px; text-align: center; ">
     	登録が完了しました
 	</div>
 <br>
 <br>
-
-<p>
-    <a href="StudentList.action">学生一覧へ戻る</a>
-</p>
+    <a href="TestRegist.action">戻る</a>
+    <a href="TestList.action" style="margin-left: 30px;">成績参照</a>
 
 </c:param>
 </c:import>

@@ -29,7 +29,9 @@
     </div>
 
     <button type="submit" class="btn btn-primary">登録</button>
-    <a href="SubjectList.action" class="btn btn-secondary">戻る</a>
+    <br>
+    <br>
+    <a href="SubjectList.action">戻る</a>
 </form>
 
 </c:param>

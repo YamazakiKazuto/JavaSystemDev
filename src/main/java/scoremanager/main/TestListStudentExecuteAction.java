@@ -6,6 +6,7 @@ import bean.School;
 import bean.Student;
 import bean.Teacher;
 import bean.TestListStudent;
+import dao.StudentDao;
 import dao.TestListStudentDao;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -44,17 +45,19 @@ public class TestListStudentExecuteAction extends Action {
         TestListStudentDao teststuDao = new TestListStudentDao();
         List<TestListStudent> tesstu = teststuDao.filter(student);
         
+        StudentDao dao = new StudentDao();
+    	Student stu = dao.get(no);
+        request.setAttribute("studentone",stu);
+        
         if (tesstu != null && tesstu.isEmpty()) {
-            request.setAttribute("error", "成績情報が存在しませんでした");
-            session.removeAttribute("classList");
-            session.removeAttribute("subjectlist");
+        	
+        	request.setAttribute("stuerror", "成績情報が存在しませんでした");
             request.getRequestDispatcher("test_list_student.jsp")
                    .forward(request, response);
 
         }
         request.setAttribute("tesstu", tesstu);
-        session.removeAttribute("classList");
-        session.removeAttribute("subjectlist");
+
         request.getRequestDispatcher("test_list_student.jsp")
         .forward(request, response);
     }

@@ -11,14 +11,15 @@
 
 <c:param name="content">
 
-<h2>学生情報更新完了</h2>
+<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">学生情報変更</h2>
+	<div style="background-color: #8fc1a9; color: #034732; padding: 8px 16px;
+    	border-radius: 4px; text-align: center; ">
+    	登録が完了しました
+	</div>
+<br>
+<br>
 
-<p>
-    学生情報の更新が正常に完了しました。
-</p>
-
-<p>
-    <a href="StudentList.action">学生一覧画面に戻る</a>
+    <a href="StudentList.action">学生一覧</a>
 </p>
 
 </c:param>

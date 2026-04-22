@@ -10,69 +10,79 @@
 
 <c:param name="content">
 
-<h2>成績検索画面</h2>
+<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">成績参照</h2>
 <br>
-<h6>生徒ごとの検索</h6>
 
-<c:if test="${not empty stuerror}">
-    <p class="error" style="color:red;">${stuerror}</p>
-</c:if>
 
-<form action="TestListStudentExecute.action" method="post">
 
-    <p>
-        学生番号：
-        <input type="text" name="no" required>
-    </p>
-    <p>
-        <input type="submit" value="検索">
-    </p>
-    
-
+<form action="TestListSubjectExecute.action" method="get">
+	<div class="row border mx-3 mb-3 py-2 align-items-center rounded" id="filter">
+		<div class="col-2"><h6>科目情報</h6></div>
+		
+    	<div class="col-2">
+        	<label class="form-label">入学年度</label>
+            	<select class="form-select" name="entYear">
+                    <option value="">--------</option>
+                    <c:forEach var="year" items="${entyearset}">
+                    <%-- 現在のyearと選択されていたf1が一致していた場合selectedを追記 --%>
+                	    <option value="${year}">${year}</option>
+                    </c:forEach>
+                </select>
+         </div>
+         <div class="col-2">
+            <label class="form-label">クラス</label>
+         	   <select class="form-select" name="classCd">
+            	   <option value="">--------</option>
+                   <c:forEach var="cla" items="${classlist}">
+                   <%-- 現在のnumと選択されていたf2が一致していた場合selectedを追記 --%>
+                	   <option value="${cla}">${cla}</option>
+                   </c:forEach>
+                </select>
+         </div>
+         <div class="col-3">
+   		     <label class="form-label">科目</label>
+        	     <select class="form-select" name="subjectCd">
+            	     <option value="">--------</option>
+                	     <c:forEach var="subject" items="${subjectlist}">
+                         <%-- 現在のnumと選択されていたf2が一致していた場合selectedを追記 --%>
+                      	    <option value="${subject.cd}">${subject.name}</option>
+                   	     </c:forEach>
+                 </select>
+         </div>
+         <div class="col-3 text-center">
+  		     <button class="btn btn-secondary" id="filter-button">検索</button>
+         </div>
+         <c:if test="${not empty claerror}"> 
+        	
+		<div style="color:#ff9933;">
+   			入学年度とクラスと科目を選択してください
+		</div>
+        	
+		 </c:if>
+         <div class="mt-2 text-warning">${errors.get("f1")}</div>
+    </div>
 </form>
+ 
 
-<br>
-<h6>クラス・科目ごとの検索</h6>
-
-<c:if test="${not empty claerror}">
-    <p class="error" style="color:red;">${claerror}</p>
-</c:if>
-
-<form action="TestListSubjectExecute.action" method="post">
-
-    <p>
-        入学年度：
-        <input type="number" name="ent_year">
-    </p>
-
-
-    <p>
-    	クラス:
-     <select name="classNum">
-     <%--　セッションに保存されているcourselistを拡張for文形式で --%>
-    	<c:forEach var="cla" items="${classlist}">
-        	<option value="${cla}">${cla}</option>
-    	</c:forEach>            
-     </select>
-    </p>
-
-	 <p>
-    	科目:
-     <select name="subjectCd">
-     <%--　セッションに保存されているcourselistを拡張for文形式で --%>
-    	<c:forEach var="subject" items="${subjectlist}">
-        	<option value="${subject.cd}">${subject.cd} : ${subject.name}</option>
-    	</c:forEach>            
-     </select>
-    </p>
-	
-    <p>
-        <input type="submit" value="検索">
-    </p>
-    
-
+ <form action="TestListStudentExecute.action" method="get">
+	<div class="row border mx-3 mb-3 py-2 align-items-center rounded" id="filter">
+    	<div class="col-2"><h6>学生情報</h6></div>
+    	<div class="col-4">
+  			<label class="form-label">学生番号</label>
+  			<input type="text" name="no" class="form-control" required>
+		</div>
+    	
+        
+        <div class="col-3 text-center">
+  		    <button class="btn btn-secondary" id="filter-button">検索</button>
+        </div>
+     
+    </div>
 </form>
-
+<div style="color:#0dcaf0; margin: 8px 16px;">
+   	科目情報を選択または学生情報を入力して検索ボタンをクリックしてください
+</div>
+     
 
 
 </c:param>

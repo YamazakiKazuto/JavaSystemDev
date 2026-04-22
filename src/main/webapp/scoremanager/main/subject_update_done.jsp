@@ -10,12 +10,16 @@
 
 <c:param name="content">
 
-<h2>科目の変更が完了しました</h2>
-<p>更新後の情報は下記になります</p>
-<p>    科目コード　:　${subject.cd}</p>
-<p>    科目名　　:　${subject.name}</p>
-
-<a href="SubjectList.action">科目一覧画面に戻る</a>
+<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">科目情報変更</h2>
+	<div style="background-color: #8fc1a9; color: #034732; padding: 8px 16px;
+    	border-radius: 4px; text-align: center; ">
+    	登録が完了しました
+	</div>
+<br>
+<br>
+ 
+ <a href="SubjectList.action" style="margin-left: 30px;" >科目一覧</a>
+  
 
 </c:param>
 </c:import>
