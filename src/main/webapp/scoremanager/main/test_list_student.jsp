@@ -62,11 +62,15 @@
     	<div class="col-2"><h6>学生情報</h6></div>
     	<div class="col-4">
   			<label class="form-label">学生番号</label>
-  			<input type="number" name="no" 
-        	<c:if test="${not empty returnid}"> 	
-   				value="${returnid }" 
-			</c:if>
-        	class="form-control" required>
+  			<c:choose>
+           		<c:when test="${not empty returnid}">
+            		<input type="number" name="no" value ="${returnid}"  class="form-control" required> 
+        		
+                </c:when>
+                <c:otherwise>
+            		<input type="number" name="no" class="form-control" placeholder="学生番号を入力してください" required>
+                </c:otherwise>
+                </c:choose>
 		</div>
         
         <div class="col-3 text-center">

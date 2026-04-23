@@ -40,6 +40,7 @@ ${param.scripts}
         	    <p><a href="TestRegist.action" style="margin-left: 15px;">成績登録</a></p>
             	<p><a href="TestList.action" style="margin-left: 20px;">成績参照</a></p>
             	<p><a href="SubjectList.action">科目管理</a></p>
+            	<p><a href="ClassCounts.action">クラス管理</a></p>
     		</aside>
 
         <!-- 右コンテンツ -->

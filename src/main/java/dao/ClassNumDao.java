@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import bean.ClassNum;
 import bean.School;
@@ -132,6 +134,36 @@ public class ClassNumDao extends Dao {
 	}
 
 
+   public Map<String, Integer> countStudentsByClass(School school) throws Exception {
+       Map<String, Integer> map = new HashMap<>();
+       Connection connection = getConnection();
+       PreparedStatement statement = null;
+       ResultSet rSet = null;
+
+       try {
+           // SQL: 学校コードで絞り込み、クラスごとに集計
+           String sql = "SELECT class_num, COUNT(*) as cnt FROM student WHERE school_cd=? GROUP BY class_num";
+           
+           statement = connection.prepareStatement(sql);
+           statement.setString(1, school.getCd());
+           
+           rSet = statement.executeQuery();
+
+           while (rSet.next()) {
+               // クラス番号をキー、人数(cnt)を値として保存
+               map.put(rSet.getString("class_num"), rSet.getInt("cnt"));
+           }
+       } catch (Exception e) {
+           throw e;
+       } finally {
+           // リソースの解放
+           if (rSet != null) rSet.close();
+           if (statement != null) statement.close();
+           if (connection != null) connection.close();
+       }
+       return map;
+   }
+	
     public boolean save(ClassNum classNum) throws Exception {
 
     }
