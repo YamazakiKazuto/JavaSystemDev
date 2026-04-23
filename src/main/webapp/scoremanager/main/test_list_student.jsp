@@ -62,9 +62,12 @@
     	<div class="col-2"><h6>学生情報</h6></div>
     	<div class="col-4">
   			<label class="form-label">学生番号</label>
-  			<input type="text" name="no" class="form-control" required>
+  			<input type="number" name="no" 
+        	<c:if test="${not empty returnid}"> 	
+   				value="${returnid }" 
+			</c:if>
+        	class="form-control" required>
 		</div>
-    	
         
         <div class="col-3 text-center">
   		    <button class="btn btn-secondary" id="filter-button">検索</button>
@@ -73,13 +76,13 @@
     </div>
 </form>
 
-<p>氏名　:　${studentone.name }（ ${studentone.no } ）</p>
-
-<c:if test="${not empty stuerror}"> 	
+<c:choose>
+<c:when test="${not empty stuerror}"> 	
    	<p>${stuerror }</p>
-</c:if>
+</c:when>
 
-
+<c:otherwise>
+<p>氏名　:　${studentone.name }（ ${studentone.no } ）</p>
 <table class="table table-hover">
     <tr>
         <th style="width: 40%;">科目名</th>
@@ -98,7 +101,8 @@
     </c:forEach>
 </table>
 
-
+</c:otherwise>
+</c:choose>
 
 
 </c:param>

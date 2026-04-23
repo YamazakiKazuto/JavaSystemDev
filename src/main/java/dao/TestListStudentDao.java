@@ -14,7 +14,7 @@ public class TestListStudentDao extends Dao {
     private String baseSql =
         "select su.name as subject_name, t.subject_cd, t.no, t.point " +
         "from test t " +
-        "join subject su on t.subject_cd = su.cd ";
+        "right join subject su on t.subject_cd = su.cd ";
 
     /**
      * ResultSet → List<TestListStudent>
@@ -24,6 +24,7 @@ public class TestListStudentDao extends Dao {
         List<TestListStudent> list = new ArrayList<>();
 
         while (rs.next()) {
+        	System.out.println(" swswswswswsws");
             TestListStudent tls = new TestListStudent();
             tls.setSubjectName(rs.getString("subject_name"));
             tls.setSubjectCd(rs.getString("subject_cd"));
@@ -32,7 +33,7 @@ public class TestListStudentDao extends Dao {
 
             list.add(tls);
         }
-
+        
         return list;
     }
 
@@ -43,15 +44,18 @@ public class TestListStudentDao extends Dao {
 
         List<TestListStudent> list = new ArrayList<>();
 
+        System.out.println("student_no = "+student.getNo());
+        System.out.println("school_cd = "+student.getSchool().getCd());
         Connection con = getConnection();
         PreparedStatement ps = con.prepareStatement(
             baseSql +
-            "where t.student_no=? and t.school_cd = ? order by t.subject_cd, t.no"
+            "where t.student_no=? and t.school_cd = ? "
         );
+
         ps.setString(1, student.getNo());
         ps.setString(2, student.getSchool().getCd());
 
-        ResultSet rs = ps.executeQuery();
+        ResultSet rs = ps.executeQuery();        
         list = postFilter(rs);
 
         rs.close();
@@ -60,4 +64,6 @@ public class TestListStudentDao extends Dao {
 
         return list;
     }
+    
+    
 }

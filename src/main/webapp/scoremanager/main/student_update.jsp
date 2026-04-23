@@ -10,32 +10,41 @@
 
 <c:param name="content">
 
-<h2>学生情報更新</h2>
+
+<h2 class="bg-light p-3 mb-4">学生情報変更</h2>
 
 <form action="StudentUpdateExecute.action" method="post">
 
-    <!-- 学籍番号（更新不可・送信用に hidden） -->
-    <p>
-        学籍番号： ${student.no}
-        <input type="hidden" name="no" value="${student.no}">
-    </p>
-
-    <!-- 学校（更新不可） -->
-    <p>
-        学校： ${student.school.name}
-    </p>
+	    <!-- 入学年度 -->
+    <div>
+        <label>入学年度</label>
+        <p>　${student.entYear}</p>
+        <input type="hidden" name="entYear" value="${student.entYear}">
+    </div>
     
-        <!-- 氏名（更新可） -->
-    <p>
-        氏名：
-        <input type="text" name="name"
-               value="${student.name}" required>
-    </p>
+	
+    <!-- 学籍番号 -->
+    <div>
+        <label>学生番号</label>
+            <p>　${student.no}</p>
+            <input type="hidden" name="no" value="${student.no}">
+    </div>
 
-    <!-- クラス（更新可） -->
-    <p>
-        クラス：
-        <select name="class_num">
+
+    <!-- 氏名 -->
+    <div>
+        <label>氏名</label>
+        <div>
+            <input type="text" name="name" class="form-control" value="${student.name}" required>
+        </div>
+    </div>
+    
+	<br>
+    
+    <!-- クラス -->
+    <div>
+        <label>クラス</label>
+        <select name="class_num" class="form-select">
             <c:forEach var="cn" items="${classnum}">
                 <option value="${cn}"
                     <c:if test="${cn == student.classNum}">
@@ -45,31 +54,33 @@
                 </option>
             </c:forEach>
         </select>
-    </p>
+    </div>
+	<br>
+    <!-- 在学状況 -->
+    <div>
+        <label>在学中</label>
+        <div class="form-check form-check-inline">
+            <input type="checkbox" name="is_enrolled" value="true"
+                <c:if test="${student.attend}">checked</c:if>
+        </div>
+    </div>
 
-    <!-- 在学中フラグ（更新可） -->
-    <p>
-        在学状況<br>
-        <label>
-            <input type="radio" name="is_enrolled" value="true"
-                <c:if test="${student.attend}">
-                    checked
-                </c:if>>
-            〇
-        </label>
+    <!-- ボタン -->
+    <br>
+    <br>
+   
+    
+    <div>
+        
+        <button type="submit" class="btn btn-primary">
+            変更
+        </button>
         <br>
-        <label>
-            <input type="radio" name="is_enrolled" value="false"
-                <c:if test="${!student.attend}">
-                    checked
-                </c:if>>
-            ×
-        </label>
-    </p>
-
-    <p>
-        <input type="submit" value="更新"><a href="StudentList.action" style="margin-left: 15px;">戻る</a>
-    </p>
+        <br>
+        <a href="StudentList.action" class="ms-3">
+            戻る
+        </a>
+    </div>
 
 </form>
 

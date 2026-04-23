@@ -13,24 +13,28 @@
 <h2>科目情報更新</h2>
 
 <form action="SubjectUpdateExecute.action" method="post">
+    <%-- エラーメッセージの表示 --%>
+    <c:if test="${not empty error}">
+        <p style="color: red;">${error}</p>
+    </c:if>
 
-    <p>
-        科目ID： ${subject.cd}
+    <div>
+        <label>科目コード</label>
+        <%-- value属性に ${cd} をセット --%>
         <input type="hidden" name="cd" value="${subject.cd}">
-    </p>
+        <p>${subject.cd}</p>
+    </div>
 
-   
-    <p>
-        科目名：
-        <input type="text" name="name"
-               value="${subject.name}" required>
-    </p>
+    <div class="mb-3">
+        <label class="form-label">科目名</label>
+        <%-- value属性に ${name} をセット --%>
+        <input type="text" name="name" class="form-control" value="${subject.name}">
+    </div>
 
-    <p>
-        <input type="submit" value="更新"><a href="SubjectList.action" style="margin-left: 15px;">戻る</a>
-    </p>
-
-
+    <button type="submit" class="btn btn-primary">変更</button>
+    <br>
+    <br>
+    <a href="SubjectList.action">戻る</a>
 </form>
 
 </c:param>

@@ -7,9 +7,6 @@ public class TestListStudent {
     private int num;
     private int point;
 
-    public TestListStudent() {
-        // デフォルトコンストラクタ
-    }
 
     public String getSubjectName() {
         return subjectName;

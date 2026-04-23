@@ -41,11 +41,7 @@ public class TestRegistAction extends Action {
             String classNum = request.getParameter("class_num");
             String subjectCode = request.getParameter("subject_code");
             String noStr = request.getParameter("no");
-            
-            System.out.println("entYear=" + entYearStr);
-            System.out.println("classNum=" + classNum);
-            System.out.println("subjectCode=" + subjectCode);
-            System.out.println("no=" + noStr);
+
 
             List<String> errors = new ArrayList<>();
             if (entYearStr == null || entYearStr.isEmpty() ||

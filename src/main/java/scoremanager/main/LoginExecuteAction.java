@@ -28,7 +28,7 @@ public class LoginExecuteAction extends Action {
    			else if(user == null) {
    				request.setAttribute("returnid",id);
    				request.setAttribute("returnpassword",password);
-   				request.setAttribute("error","IDまたはパスワードが確認できませんでした");
+   				request.setAttribute("error","ログインに失敗しました。IDまたはパスワードが正しくありません");
    				request.getRequestDispatcher("login.jsp")
                 .forward(request, response);
    			}

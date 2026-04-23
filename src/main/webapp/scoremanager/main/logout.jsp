@@ -23,9 +23,14 @@
 		</c:if>
     <main>
         <h2 class=" h3 mb-3 fw-normal bg-secondary bg-opacity-10 py-2 px-4 ">ログアウト</h2>
-        <p>ご利用ありがとうございました。</p>
+		<div style="background-color: #8fc1a9; color: #034732; padding: 8px 16px;
+    		border-radius: 4px; text-align: center; ">
+    		ログアウトしました
+		</div>
         
-        <p><a href="Login.action">ログイン画面へ戻る</a></p>
+        <br>
+        <br>
+        <p><a href="Login.action">ログイン</a></p>
     </main>
 
     </section>

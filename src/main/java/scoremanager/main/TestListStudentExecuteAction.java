@@ -2,7 +2,6 @@ package scoremanager.main;
 
 import java.util.List;
 
-import bean.School;
 import bean.Student;
 import bean.Teacher;
 import bean.TestListStudent;
@@ -35,27 +34,32 @@ public class TestListStudentExecuteAction extends Action {
 //        TestDao testDao = new TestDao();
 //        List<Test> list =
 //            testDao.filter(entYear, classNum, subject, num, school);
-        School school = new School();
-        school.setCd(user.getSchool().getCd());
-        
-        Student student = new Student();
-        student.setNo(no);
-        student.setSchool(school);
-        
-        TestListStudentDao teststuDao = new TestListStudentDao();
-        List<TestListStudent> tesstu = teststuDao.filter(student);
-        
+       
         StudentDao dao = new StudentDao();
     	Student stu = dao.get(no);
-        request.setAttribute("studentone",stu);
         
+        TestListStudentDao teststuDao = new TestListStudentDao();
+        List<TestListStudent> tesstu = teststuDao.filter(stu);  
+        
+
+    	request.setAttribute("returnid",no);
+
+    	if (!stu.getSchool().getCd().trim().equals(user.getSchool().getCd().trim())) {
+    	    request.setAttribute("stuerror", "成績情報が存在しませんでした");
+    	    request.getRequestDispatcher("test_list_student.jsp")
+    	           .forward(request, response);
+    	    return;
+    	}
+
+    	request.setAttribute("studentone",stu);        
+
         if (tesstu != null && tesstu.isEmpty()) {
-        	
-        	request.setAttribute("stuerror", "成績情報が存在しませんでした");
+            request.setAttribute("studeerror", "成績情報が存在しませんでした");
             request.getRequestDispatcher("test_list_student.jsp")
                    .forward(request, response);
-
+            return;
         }
+
         request.setAttribute("tesstu", tesstu);
 
         request.getRequestDispatcher("test_list_student.jsp")

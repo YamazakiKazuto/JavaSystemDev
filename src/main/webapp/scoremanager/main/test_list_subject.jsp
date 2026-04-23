@@ -19,7 +19,14 @@
     	<div class="col-2">
         	<label class="form-label">入学年度</label>
             	<select class="form-select" name="entYear">
-                    <option value="">--------</option>
+            		<c:choose>
+            		<c:when test="${not empty reentYear}">
+            			<option value="${reentYear }">${reentYear }</option>
+                    </c:when>
+                    <c:otherwise>
+                    	<option value="">--------</option>
+                    </c:otherwise>
+                    </c:choose>
                     <c:forEach var="year" items="${entyearset}">
                     <%-- 現在のyearと選択されていたf1が一致していた場合selectedを追記 --%>
                 	    <option value="${year}">${year}</option>
@@ -29,7 +36,14 @@
          <div class="col-2">
             <label class="form-label">クラス</label>
          	   <select class="form-select" name="classCd">
-            	   <option value="">--------</option>
+            	   <c:choose>
+            		<c:when test="${not empty reclassCd}">
+            			<option value="${reclassCd }">${reclassCd }</option>
+                    </c:when>
+                    <c:otherwise>
+                    	<option value="">--------</option>
+                    </c:otherwise>
+                    </c:choose>
                    <c:forEach var="cla" items="${classlist}">
                    <%-- 現在のnumと選択されていたf2が一致していた場合selectedを追記 --%>
                 	   <option value="${cla}">${cla}</option>
@@ -39,7 +53,14 @@
          <div class="col-3">
    		     <label class="form-label">科目</label>
         	     <select class="form-select" name="subjectCd">
-            	     <option value="">--------</option>
+            	     <c:choose>
+            		<c:when test="${not empty resubjectCd }">
+            			<option value="${resubjectCd }">${resubjectName }</option>
+                    </c:when>
+                    <c:otherwise>
+                    	<option value="">--------</option>
+                    </c:otherwise>
+                    </c:choose>
                 	     <c:forEach var="subject" items="${subjectlist}">
                          <%-- 現在のnumと選択されていたf2が一致していた場合selectedを追記 --%>
                       	    <option value="${subject.cd}">${subject.name}</option>
@@ -65,7 +86,7 @@
     	<div class="col-2"><h6>学生情報</h6></div>
     	<div class="col-4">
   			<label class="form-label">学生番号</label>
-  			<input type="text" name="no" class="form-control" required>
+  			<input type="number" name="no" class="form-control" required>
 		</div>
     	
         

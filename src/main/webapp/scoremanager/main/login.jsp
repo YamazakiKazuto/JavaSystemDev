@@ -11,55 +11,74 @@
 
 <c:param name="content">
 
-<section>
-    <h2 class=" h3 mb-3 fw-normal bg-secondary bg-opacity-10 py-2 px-4 text-center">ログイン</h2>
+<section class="d-flex justify-content-center mt-5">
+    <div class="card shadow-sm" style="width: 420px;">
+        
+        <!-- ① ログイン見出し -->
+        <h2 class="text-center h4 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">ログイン</h2>
 
-    <%-- ログイン失敗時のエラーメッセージ表示 --%>
-    <c:if test="${not empty error}">
-        <p style="color: red;">${error}</p>
-    </c:if>
+        <div class="card-body px-4">
 
-    <%-- actionを LoginExecute.action に変更 --%>
-    <form action="LoginExecute.action" method="post">
+            <!-- エラーメッセージ -->
+            <c:if test="${not empty error}">
+                <p class="text-danger text-center">${error}</p>
+            </c:if>
 
-        <div class="mb-3">
-        	<label for="cd" class="form-label">ユーザID</label>
-        	
-        	<input type="text" name="id" 
-        	<c:if test="${not empty returnid}"> 	
-   				value="${returnid }" 
-			</c:if>
-        	class="form-control" required>
-    	</div>
-    	
+            <form action="LoginExecute.action" method="post">
 
-        <div class="mb-3">
-        	<label for="name" class="form-label">パスワード</label>
-        	
-        	<input type="password" id="password" name="password"
-       			value="${not empty returnpassword ? returnpassword : ''}"
-       			class="form-control" required>
-        	<div class="d-flex justify-content-center mt-2">
-        		<input class="form-check-input" type="checkbox" id="showPassword" onclick="togglePassword()">
-        		<label class="form-check-label" for="showPassword">
-            		パスワードを表示
-        		</label>
-    		</div>
-   	 	</div>
-    	
-    	
-    	<script>	
-			function togglePassword() {
-    		const pw = document.getElementById("password");
-    		pw.type = pw.type === "password" ? "text" : "password";
-			}
-		</script>
+      
+                <div class="form-floating mb-3">
+    				<input type="text"
+           				class="form-control bg-primary bg-opacity-10" id="userId" name="id"
+           				<c:if test="${not empty returnid}">
+               				value="${returnid}"
+           				</c:if>
+           				required>
+    				<label for="userId">ID</label>
+				</div>
+                
+                
+				<div class="form-floating mb-3">
+    				<input type="password"
+           				class="form-control bg-primary bg-opacity-10" id="password" name="password"
+           				<c:if test="${not empty returnpassword}">
+               				value="${returnpassword}"
+           				</c:if>
+           				required>
+    				<label for="password">パスワード</label>
+				</div>
+              
+       
 
-        <p class="text-center">
-            <button type="submit" class="btn btn-primary">ログイン</button>
-        </p>
-    </form>
+                <!-- ④⑤ パスワード表示 -->
+                <div class="form-check mb-3 d-flex justify-content-center">
+                    <input class="form-check-input"
+                           type="checkbox"
+                           id="showPassword"
+                           onclick="togglePassword()">
+                    <label class="form-check-label" for="showPassword">
+                        パスワードを表示
+                    </label>
+                </div>
+
+                <!-- ⑥ ログインボタン -->
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">
+                        ログイン
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
 </section>
+
+<script>
+function togglePassword() {
+    const pw = document.getElementById("password");
+    pw.type = pw.type === "password" ? "text" : "password";
+}
+</script>
 
 </c:param>
 </c:import>

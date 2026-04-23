@@ -49,6 +49,10 @@ public class TestListSubjectExecuteAction extends Action {
         SubjectDao dao = new SubjectDao();
         Subject sub = dao.get(subjectCd,user.getSchool());
         request.setAttribute("subjectone",sub);
+        request.setAttribute("reentYear",entYear);
+        request.setAttribute("reclassCd",classnum);
+        request.setAttribute("resubjectCd",sub.getCd());
+        request.setAttribute("resubjectName",sub.getName());
         
         if (tescla != null && tescla.isEmpty()) {
             request.setAttribute("error", "学生情報が存在しませんでした");

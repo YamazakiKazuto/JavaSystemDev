@@ -23,6 +23,7 @@ public class StudentUpdateExecuteAction extends Action {
         StudentDao studao = new StudentDao();
 
         // 既存学生データ取得
+        System.out.println(no);
         Student student = studao.get(no);
 
         // 更新対象のみセット

@@ -11,7 +11,7 @@
 <c:param name="content">
 
 <div class="container">
-    <h2>科目削除</h2>
+	<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">科目情報削除</h2>
 
     <c:if test="${not empty errors}">
         <div class="error-messages">
@@ -21,25 +21,18 @@
         </div>
     </c:if>
 
-    <div class="confirmation-box">
-        <p>以下の科目を削除します。よろしいですか？</p>
+<p>「${subject.name}（${subject.cd }）」を削除してもよろしいでしょうか？</p>
 
-        
-		<p>    科目コード　:　${subject.cd}</p>
-		<p>    科目名　　:　${subject.name}</p>
-	
-        <div class="actions" style="margin-top: 20px;">
-         
-            <form action="SubjectDeleteExecute.action" method="post" style="display: inline;">
+<form action="SubjectDeleteExecute.action" method="post" style="display: inline;">
+               
+	<input type="hidden" name="cd" value="${subject.cd}">
                 
-                <input type="hidden" name="cd" value="${subject.cd}">
-                
-                <input type="submit" value="削除">
-            </form>
-           <a href="SubjectList.action"  style="margin-left: 15px;">戻る</a>
-        </div>
-    </div>
-</div>
+    <button class="btn btn-danger">削除</button>
+</form>
+<br>
+<br>
+<a href="SubjectList.action"  style="margin-left: 15px;">戻る</a>
+
 
 </c:param>
 </c:import>

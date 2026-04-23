@@ -19,7 +19,8 @@ public class SubjectUpdateExecuteAction extends Action {
     	Teacher user = (Teacher) session.getAttribute("user");
         String cd = request.getParameter("cd");
         String name = request.getParameter("name");
-        
+        System.out.println(cd);
+        System.out.println(name);
         SubjectDao dao = new SubjectDao();
         Subject subject = dao.get(cd,user.getSchool());
 

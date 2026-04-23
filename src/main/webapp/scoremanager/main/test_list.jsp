@@ -69,7 +69,7 @@
     	<div class="col-2"><h6>学生情報</h6></div>
     	<div class="col-4">
   			<label class="form-label">学生番号</label>
-  			<input type="text" name="no" class="form-control" required>
+  			<input type="number" name="no" class="form-control" required>
 		</div>
     	
         

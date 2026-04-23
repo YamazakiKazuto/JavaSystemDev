@@ -19,12 +19,15 @@ public class StudentCreateExecuteAction extends Action {
         String no = request.getParameter("no");
         String name = request.getParameter("name");
         String entYearStr = request.getParameter("ent_year");
-        String classNum = request.getParameter("classnum");
+        String classNum = request.getParameter("classnumm");
         Teacher user =(Teacher)session.getAttribute("user");
         
         // 入学年度未入力チェック
         if (entYearStr == null || entYearStr.isEmpty()) {
             request.setAttribute("error", "入学年度を選択してください。");
+            request.setAttribute("no",no);
+            request.setAttribute("classnu", classNum);
+            request.setAttribute("name",name);
             request.getRequestDispatcher("student_create.jsp")
                    .forward(request, response);
             return;
@@ -38,6 +41,11 @@ public class StudentCreateExecuteAction extends Action {
 
         if (existing != null) {
             request.setAttribute("error", "学生番号が重複しています。");
+            request.setAttribute("no",no);
+            request.setAttribute("name",name);
+            request.setAttribute("classnu", classNum);
+            int entYear=Integer.parseInt(entYearStr);
+            request.setAttribute("entYEAR", entYear);
             request.getRequestDispatcher("student_create.jsp")
                    .forward(request, response);
             return;

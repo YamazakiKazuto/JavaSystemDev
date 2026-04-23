@@ -22,38 +22,77 @@
 
 <form action="StudentCreateExecute.action" method="post">
 
-    <p>
-        入学年度：<br>
-        <input type="number" name="ent_year"
-               value="${param.ent_year}">
-    </p>
 
-    <p>
-        学生番号：<br>
-        <input type="text" name="no"
-               value="${param.no}" required>
-    </p>
+<div class="mb-3">
+    <label class="form-label">入学年度</label>
+    <%-- value属性に ${cd} をセット --%>
+    <c:choose>
+    <c:when test="${not empty entYEAR}">
+        <input type="number" name="ent_year" class="form-control" value="${entYEAR}" >
+    </c:when>
 
-    <p>
-        氏名：<br>
-        <input type="text" name="name"
-               value="${param.name}" required>
-    </p>
+    <c:otherwise>
+        <input type="number" name="ent_year" class="form-control"
+               placeholder="---------" >
+    </c:otherwise>
+	</c:choose>
+</div>
 
-    <p>
-    	クラス:<br>
-     <select name="classnum">
-     <%--　セッションに保存されているcourselistを拡張for文形式で --%>
-    	<c:forEach var="num" items="${classnum}">
-        	<option value="${num}">${num}</option>
-    	</c:forEach>            
-     </select>
-    </p>
 
-    <p>
-        <input type="submit" value="登録"><a href="StudentList.action" style="margin-left: 15px;">戻る</a>
-    </p>
+<div class="mb-3">
+    <label class="form-label">学生番号</label>
+    <%-- value属性に ${name} をセット --%>
+    <c:choose>
+    <c:when test="${not empty no}">
+        <input type="number" name="no" class="form-control" value="${no}" required>
+    </c:when>
+
+    <c:otherwise>
+        <input type="number" name="no" class="form-control"
+               placeholder="学生番号を入力してください" required>
+    </c:otherwise>
+	</c:choose>
     
+</div>
+
+
+<div class="mb-3">
+    <label class="form-label">氏名</label>
+    <%-- value属性に ${name} をセット --%>
+    <c:choose>
+    <c:when test="${not empty name}">
+        <input type="text" name="name" class="form-control" value="${name}" required>
+    </c:when>
+
+    <c:otherwise>
+        <input type="text" name="name" class="form-control"
+               placeholder="氏名を入力してください" required>
+    </c:otherwise>
+	</c:choose>
+    
+</div>
+
+
+
+<div class="mb-3">
+    <label class="form-label">クラス</label>
+    <select name="classnumm" class="form-control">
+        <c:forEach var="num" items="${classnum}">
+            <option value="${num}" 
+                <c:if test="${num == classnu}">selected</c:if>>
+                ${num}
+            </option>
+        </c:forEach>
+    </select>
+</div>
+
+    
+
+<button type="submit" class="btn btn-primary">登録して終了</button>
+<br>
+<br>
+<a href="StudentList.action">戻る</a>
+
 
 </form>
 
