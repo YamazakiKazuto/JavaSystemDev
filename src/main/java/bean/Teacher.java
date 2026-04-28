@@ -1,3 +1,4 @@
+// 内田桔梗
 package bean;
 
 import java.io.Serializable;
