@@ -1,3 +1,4 @@
+// 山崎壱人
 package bean;
 
 import java.io.Serializable;
