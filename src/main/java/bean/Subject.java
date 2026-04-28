@@ -1,3 +1,4 @@
+// 勝見星斗
 package bean;
 
 import java.io.Serializable;
