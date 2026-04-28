@@ -1,4 +1,4 @@
-// 山崎壱人
+// 石川煌生
 package dao;
 
 import java.sql.Connection;
