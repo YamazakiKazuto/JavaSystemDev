@@ -23,14 +23,15 @@
 		</c:if>
     <main>
         <h2 class=" h3 mb-3 fw-normal bg-secondary bg-opacity-10 py-2 px-4 ">ログアウト</h2>
-		<div style="background-color: #8fc1a9; color: #034732; padding: 8px 16px;
-    		border-radius: 4px; text-align: center; ">
-    		ログアウトしました
-		</div>
+		<label style="display:block; background-color:#9fd0b3;">
+    		<p style="margin:0; text-align:center;">
+        	ログアウトしました
+    		</p>
+		</label>
         
         <br>
         <br>
-        <p><a href="Login.action">ログイン</a></p>
+        <link><a href="Login.action">ログイン</a></link>
     </main>
 
     </section>

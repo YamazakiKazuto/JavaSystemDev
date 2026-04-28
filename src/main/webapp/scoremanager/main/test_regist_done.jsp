@@ -12,10 +12,11 @@
 <c:param name="content">
 
 	<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">成績管理</h2>
-	<div style="background-color: #8fc1a9; color: #034732; padding: 8px 16px;
-    	border-radius: 4px; text-align: center; ">
-    	登録が完了しました
-	</div>
+	<label style="display:block; background-color:#9fd0b3;">
+    	<p style="margin:0; text-align:center;">
+        登録が完了しました
+    	</p>
+	</label>
 <br>
 <br>
     <a href="TestRegist.action">戻る</a>

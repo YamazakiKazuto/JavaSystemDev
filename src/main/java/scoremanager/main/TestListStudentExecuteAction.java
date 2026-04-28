@@ -19,41 +19,29 @@ public class TestListStudentExecuteAction extends Action {
         HttpSession session = request.getSession();
         Teacher user = (Teacher) session.getAttribute("user");
     	  
-//        School school = (School) request.getSession().getAttribute("school");
-//
-//        int entYear = Integer.parseInt(request.getParameter("entYear"));
-//        String classNum = request.getParameter("classNum");
-//        String subjectCd = request.getParameter("subjectCd");
-          String no = request.getParameter("no");
+        String no = request.getParameter("f4");
 
-//        // Subject取得
-//        SubjectDao subjectDao = new SubjectDao();
-//        Subject subject = subjectDao.get(subjectCd, school);
-//
-//        // 成績一覧取得
-//        TestDao testDao = new TestDao();
-//        List<Test> list =
-//            testDao.filter(entYear, classNum, subject, num, school);
-       
         StudentDao dao = new StudentDao();
     	Student stu = dao.get(no);
-        
-        TestListStudentDao teststuDao = new TestListStudentDao();
-        List<TestListStudent> tesstu = teststuDao.filter(stu);  
-        
+    	
+    	request.setAttribute("f4",no);       
 
-    	request.setAttribute("returnid",no);
-
-    	if (!stu.getSchool().getCd().trim().equals(user.getSchool().getCd().trim())) {
+    	//DBに登録されていない学生番号、もしくは入力された学生番号がユーザの学校所属の者ではない
+    	if (stu == null || (!stu.getSchool().getCd().trim().equals(user.getSchool().getCd().trim()))) {
     	    request.setAttribute("stuerror", "成績情報が存在しませんでした");
     	    request.getRequestDispatcher("test_list_student.jsp")
     	           .forward(request, response);
     	    return;
     	}
+    	
+        TestListStudentDao teststuDao = new TestListStudentDao();
+        List<TestListStudent> tesstu = teststuDao.filter(stu);  
+        
 
     	request.setAttribute("studentone",stu);        
 
-        if (tesstu != null && tesstu.isEmpty()) {
+    	//入力された学生番号はユーザの学校所属の者だが登録されたテストデータがない場合
+        if (tesstu == null || tesstu.isEmpty()) {
             request.setAttribute("studeerror", "成績情報が存在しませんでした");
             request.getRequestDispatcher("test_list_student.jsp")
                    .forward(request, response);

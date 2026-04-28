@@ -15,6 +15,7 @@ public class SubjectCreateExecuteAction extends Action {
         // 1. パラメータの取得
         String subjectCd = request.getParameter("cd");
         String subjectName = request.getParameter("name");
+        System.out.println(subjectCd);
 
         // 2. セッションから講師情報を取得（学校コード特定のため）
         HttpSession session = request.getSession();
@@ -25,12 +26,12 @@ public class SubjectCreateExecuteAction extends Action {
         // --- バリデーション開始 ---
 
         // 入力内容を保持（エラーで戻った時に再入力させないため）
-        request.setAttribute("cd", subjectCd);
-        request.setAttribute("name", subjectName);
+        request.setAttribute("return_cd", subjectCd);
+        request.setAttribute("return_name", subjectName);
         
         // 【チェック2】文字数チェック（設計書の「3文字でなかった場合」）
-        if (subjectCd.length() != 3) {
-            request.setAttribute("error", "科目コードは3文字で入力してください");
+        if (subjectCd.length() != 3 ) {
+            request.setAttribute("cd_error", "科目コードは3文字で入力してください");
             request.getRequestDispatcher("subject_create.jsp")
             .forward(request, response);
      return;
@@ -44,7 +45,7 @@ public class SubjectCreateExecuteAction extends Action {
         Subject existing = sDao.get(subjectCd,user.getSchool());
         System.out.println(existing);
         if (existing != null) {
-            request.setAttribute("error", "科目コードが重複しています。");
+            request.setAttribute("cd_error", "科目コードが重複しています。");
             request.getRequestDispatcher("subject_create.jsp")
                    .forward(request, response);
             return;

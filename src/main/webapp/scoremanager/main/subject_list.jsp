@@ -12,39 +12,28 @@
             <div class="my-2 text-end px-4">
                 <a href="SubjectCreate.action">新規登録</a>
             </div>
-
-            <c:choose>
-                <c:when test="${subjects.size() > 0}">
-                    <%-- 件数表示 --%>
-                    <div class="ms-3 mb-2">検索結果：${subjects.size()}件</div>
-                    
-                    <%-- テーブル：Bootstrapのクラスを適用 --%>
-                    <table class="table table-hover mx-3">
-                        <thead>
-                            <tr class="border-bottom">
-                                <th>科目コード</th>
-                                <th>科目名</th>
-                                <th>操作</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach var="subject" items="${subjects}">
-                                <tr>
-                                    <td>${subject.cd}</td>
-                                    <td>${subject.name}</td>
-                                    <td>
-                                        <a href="SubjectUpdate.action?cd=${subject.cd}">変更</a>
-                                        <a href="SubjectDelete.action?cd=${subject.cd}"style="margin-left: 15px;">削除</a>
-                                    </td>
-                                </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
-                </c:when>
-                <c:otherwise>
-                    <div class="ms-3">科目情報が存在しませんでした。</div>
-                </c:otherwise>
-            </c:choose>
+            
+            <%-- テーブル：Bootstrapのクラスを適用 --%>
+            <table class="table table-hover mx-3">
+                        
+          		<tr class="border-bottom">
+                	<th>科目コード</th>
+                    <th>科目名</th>
+                    <th>操作</th>
+                </tr>
+                        
+                <c:forEach var="subject" items="${subjects}">
+                <tr>
+                	<td>${subject.cd}</td>
+                    <td>${subject.name}</td>
+                    <td>
+                    	<a href="SubjectUpdate.action?cd=${subject.cd}">変更</a>
+                        <a href="SubjectDelete.action?cd=${subject.cd}"style="margin-left: 15px;">削除</a>
+                    </td>
+                </tr>
+                </c:forEach>
+                        
+            </table>
         </section>
     </c:param>
 </c:import>

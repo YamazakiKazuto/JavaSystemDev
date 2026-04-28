@@ -17,14 +17,14 @@ public class StudentDao extends Dao {
     public Student get(String no) throws Exception {
 
     	no = no.trim(); 
-		int student_id = Integer.parseInt(no);
+		
 		
 		Student student=null;
 
 	    Connection con = getConnection();
 	    PreparedStatement st = con.prepareStatement(
 	        "SELECT st.no,st.name,st.ent_year,st.class_num,st.is_attend,st.school_cd,sc.name as school_name FROM student as st LEFT JOIN school as sc ON st.school_cd = sc.cd WHERE no = ?");
-	    st.setInt(1, student_id);
+	    st.setString(1, no);
 
 	    ResultSet rs = st.executeQuery();
 	    while (rs.next()) {

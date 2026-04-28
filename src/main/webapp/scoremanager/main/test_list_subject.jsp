@@ -12,105 +12,90 @@
 
 <h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">成績一覧（科目）</h2>
 
-<form action="TestListSubjectExecute.action" method="get">
-	<div class="row border mx-3 mb-3 py-2 align-items-center rounded" id="filter">
-		<div class="col-2"><h6>科目情報</h6></div>
-		
-    	<div class="col-2">
-        	<label class="form-label">入学年度</label>
-            	<select class="form-select" name="entYear">
-            		<c:choose>
-            		<c:when test="${not empty reentYear}">
-            			<option value="${reentYear }">${reentYear }</option>
-                    </c:when>
-                    <c:otherwise>
-                    	<option value="">--------</option>
-                    </c:otherwise>
-                    </c:choose>
+<div class="border mx-3 mb-3 py-3 px-3 rounded">
+
+
+    <form action="TestListSubjectExecute.action" method="get">
+        <div class="row align-items-center mb-3">
+
+            <label class="col-2" style="padding-top:20px;"><p>科目情報</p></label>
+
+            <div class="col-2">
+                <label class="form-label">入学年度</label>
+                <select class="form-select" name="f1">
+                    <option value="">--------</option>
                     <c:forEach var="year" items="${entyearset}">
-                    <%-- 現在のyearと選択されていたf1が一致していた場合selectedを追記 --%>
-                	    <option value="${year}">${year}</option>
+                        <option value="${year}">${year}</option>
                     </c:forEach>
                 </select>
-         </div>
-         <div class="col-2">
-            <label class="form-label">クラス</label>
-         	   <select class="form-select" name="classCd">
-            	   <c:choose>
-            		<c:when test="${not empty reclassCd}">
-            			<option value="${reclassCd }">${reclassCd }</option>
-                    </c:when>
-                    <c:otherwise>
-                    	<option value="">--------</option>
-                    </c:otherwise>
-                    </c:choose>
-                   <c:forEach var="cla" items="${classlist}">
-                   <%-- 現在のnumと選択されていたf2が一致していた場合selectedを追記 --%>
-                	   <option value="${cla}">${cla}</option>
-                   </c:forEach>
+            </div>
+
+            <div class="col-2">
+                <label class="form-label">クラス</label>
+                <select class="form-select" name="f2">
+                    <option value="">--------</option>
+                    <c:forEach var="cla" items="${classlist}">
+                        <option value="${cla}">${cla}</option>
+                    </c:forEach>
                 </select>
-         </div>
-         <div class="col-3">
-   		     <label class="form-label">科目</label>
-        	     <select class="form-select" name="subjectCd">
-            	     <c:choose>
-            		<c:when test="${not empty resubjectCd }">
-            			<option value="${resubjectCd }">${resubjectName }</option>
+            </div>
+
+            <div class="col-3">
+                <label class="form-label">科目</label>
+                <select class="form-select" name="f3">
+                    <option value="">--------</option>
+                    <c:forEach var="subject" items="${subjectlist}">
+                        <option value="${subject.cd}">${subject.name}</option>
+                    </c:forEach>
+                </select>
+            </div>
+
+            <div class="col-3 text-center">
+                <button class="btn btn-secondary">検索</button>
+            </div>
+
+        </div>
+
+        <c:if test="${not empty claerror}">
+            <div class="text-warning">入学年度とクラスと科目を選択してください</div>
+        </c:if>
+    </form>
+
+	<%--二つの情報を仕切る線 --%>
+    <div class="mx-auto my-3" style="width:90%; border-bottom:1px solid #ccc;"></div>
+
+    <form action="TestListStudentExecute.action" method="get">
+        <div class="row align-items-center">
+
+            <label class="col-2" style="padding-top:20px;"><p>学生情報</p></label>
+
+            <div class="col-4">
+                <label class="form-label">学生番号</label>
+                <c:choose>
+                    <c:when test="${not empty f4}">
+                        <input type="text" name="f4" value="${f4}" class="form-control" maxlength="10" required>
                     </c:when>
                     <c:otherwise>
-                    	<option value="">--------</option>
+                        <input type="text" name="f4" class="form-control" placeholder="学生番号を入力してください" maxlength="10" required>
                     </c:otherwise>
-                    </c:choose>
-                	     <c:forEach var="subject" items="${subjectlist}">
-                         <%-- 現在のnumと選択されていたf2が一致していた場合selectedを追記 --%>
-                      	    <option value="${subject.cd}">${subject.name}</option>
-                   	     </c:forEach>
-                 </select>
-         </div>
-         <div class="col-3 text-center">
-  		     <button class="btn btn-secondary" id="filter-button">検索</button>
-         </div>
-         <c:if test="${not empty claerror}"> 
-        	
-			<div style="color:#ff9933;">
-   				${claerror }
-			</div>
-        	
-		 </c:if>
-    </div>
-</form>
- 
-
- <form action="TestListStudentExecute.action" method="get">
-	<div class="row border mx-3 mb-3 py-2 align-items-center rounded" id="filter">
-    	<div class="col-2"><h6>学生情報</h6></div>
-    	<div class="col-4">
-  			<label class="form-label">学生番号</label>
-  			<c:choose>
-           		<c:when test="${not empty returnid}">
-            		<input type="number" name="no" value ="${returnid}"  class="form-control" required> 
-        		
-                </c:when>
-                <c:otherwise>
-            		<input type="number" name="no" class="form-control" placeholder="学生番号を入力してください" required>
-                </c:otherwise>
                 </c:choose>
-		</div>
-    	
-        
-        <div class="col-3 text-center">
-  		    <button class="btn btn-secondary" id="filter-button">検索</button>
+            </div>
+
+            <div class="col-3 text-center">
+                <button class="btn btn-secondary">検索</button>
+            </div>
+
         </div>
-     
-    </div>
-</form>
+    </form>
+
+</div>
 
 
-<p>科目　:　${subjectone.name }</p>
+<div>科目　:　${subjectone.name }</div>
 <c:choose>
 
 <c:when test="${not empty error}">
-	<p>${error }</p>        
+	<div>${error }</div>        
 </c:when>
 
 <c:otherwise>

@@ -24,7 +24,7 @@ public class StudentCreateExecuteAction extends Action {
         
         // 入学年度未入力チェック
         if (entYearStr == null || entYearStr.isEmpty()) {
-            request.setAttribute("error", "入学年度を選択してください。");
+            request.setAttribute("ent_year_error", "入学年度を選択してください。");
             request.setAttribute("no",no);
             request.setAttribute("classnu", classNum);
             request.setAttribute("name",name);
@@ -40,12 +40,12 @@ public class StudentCreateExecuteAction extends Action {
         Student existing = dao.get(no);
 
         if (existing != null) {
-            request.setAttribute("error", "学生番号が重複しています。");
+            request.setAttribute("no_error", "学生番号が重複しています。");
             request.setAttribute("no",no);
             request.setAttribute("name",name);
             request.setAttribute("classnu", classNum);
             int entYear=Integer.parseInt(entYearStr);
-            request.setAttribute("entYEAR", entYear);
+            request.setAttribute("f1", entYear);
             request.getRequestDispatcher("student_create.jsp")
                    .forward(request, response);
             return;

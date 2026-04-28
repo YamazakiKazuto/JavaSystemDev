@@ -46,6 +46,11 @@
                  style="height: 10rem; background-color: #d6d6e8;">
                 <a href="ClassCounts.action">クラス管理</a>
             </div>
+            <div class="col d-flex align-items-center justify-content-center mx-2 rounded shadow"
+                style="height: 10rem; background-color: #f0f0f0;">
+                <%-- リンク先（Action名）は必要に応じて作成してください --%>
+                <a href="LoginManage.action" class="text-decoration-none">教員管理</a>
+            </div>
 
         </div>
     </section>

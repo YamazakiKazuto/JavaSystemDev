@@ -11,10 +11,12 @@
 <c:param name="content">
 
 <h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">科目情報変更</h2>
-	<div style="background-color: #8fc1a9; color: #034732; padding: 8px 16px;
-    	border-radius: 4px; text-align: center; ">
-    	変更が完了しました
-	</div>
+	<label style="display:block; background-color:#9fd0b3;">
+    	<p style="margin:0; text-align:center;">
+        変更が完了しました
+    	</p>
+	</label>
+
 <br>
 <br>
  

@@ -19,10 +19,19 @@ public class SubjectUpdateExecuteAction extends Action {
     	Teacher user = (Teacher) session.getAttribute("user");
         String cd = request.getParameter("cd");
         String name = request.getParameter("name");
-        System.out.println(cd);
-        System.out.println(name);
+
         SubjectDao dao = new SubjectDao();
         Subject subject = dao.get(cd,user.getSchool());
+        if (subject == null) {
+        	Subject sub = new Subject();
+        	sub.setCd(cd);
+        	sub.setName(name);
+        	request.setAttribute("error","科目が存在していません");
+        	request.setAttribute("subject",sub);
+        	request.getRequestDispatcher("subject_update.jsp")
+            .forward(request, response);
+        }
+        
 
         // 更新対象のみセット
         subject.setName(name);

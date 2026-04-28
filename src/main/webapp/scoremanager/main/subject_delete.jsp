@@ -27,7 +27,7 @@
                
 	<input type="hidden" name="cd" value="${subject.cd}">
                 
-    <button class="btn btn-danger">削除</button>
+    <button type="submit" value = "削除"class="btn btn-danger">削除</button>
 </form>
 <br>
 <br>

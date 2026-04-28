@@ -1,5 +1,7 @@
 package scoremanager.main;
  
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import bean.Teacher;
@@ -25,8 +27,17 @@ public class StudentCreateAction extends Action {
         ClassNumDao cladao =new ClassNumDao();
         //daoでidに合致する番号をとる
         List<String> classnum=cladao.filter(user.getSchool());
+        
+        LocalDate todaysDate = LocalDate.now();
+        int year = todaysDate.getYear();
+        List<Integer> entYearSet = new ArrayList<>();
+        for (int i = year - 10; i <= year + 1; i++) {
+            entYearSet.add(i);
+        }
+        
 //        request.setAttribute("student",student);
         session.setAttribute("classnum",classnum);
+        session.setAttribute("ent_year_set", entYearSet);
         
         request.getRequestDispatcher("student_create.jsp")
         .forward(request, response);

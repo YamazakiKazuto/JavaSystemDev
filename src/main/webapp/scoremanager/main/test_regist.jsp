@@ -15,9 +15,9 @@
 <c:param name="scripts"></c:param>
 
 <c:param name="content">
-<body class="container mt-4">
+<body class="border rounded p-3">
 
-<h2 class="mb-4">成績登録</h2>
+<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">成績管理</h2>
 
 <!-- エラーメッセージ -->
 
@@ -78,11 +78,11 @@
     </div>
 
     <!-- ボタン -->
-    <div class="col-md-2">
-        <button type="submit" class="btn btn-primary w-100">検索</button>
-    </div>
-
-</div>
+    <div class="col-md-2 d-flex align-items-end">
+	    <button type="submit" class="btn btn-secondary w-100">
+	        検索
+	    </button>
+	</div>
 
 
 </form>
@@ -131,7 +131,12 @@
                     <input type="number"
                            name="point"
                            value="${t.point}"
-                           class="form-control">
+                           class="form-control"
+                           min="0" max="100"
+           				   required          				   
+						   oninvalid="this.setCustomValidity('0～100の値で入力してください')"
+           				   oninput="this.setCustomValidity('')">
+           				                         
                 </td>
             </tr>
         </c:forEach>

@@ -20,10 +20,10 @@ public class TestListSubjectExecuteAction extends Action {
         HttpSession session = request.getSession();
         Teacher user = (Teacher) session.getAttribute("user");
     	  
-        String entYear = request.getParameter("entYear");
-        String classnum = request.getParameter("classCd");
+        String entYear = request.getParameter("f1");
+        String classnum = request.getParameter("f2");
         
-        String subjectCd = request.getParameter("subjectCd");
+        String subjectCd = request.getParameter("f3");
         
         boolean isAnyNull =
         	    (entYear == null || entYear.isEmpty()) ||
@@ -49,9 +49,9 @@ public class TestListSubjectExecuteAction extends Action {
         SubjectDao dao = new SubjectDao();
         Subject sub = dao.get(subjectCd,user.getSchool());
         request.setAttribute("subjectone",sub);
-        request.setAttribute("reentYear",entYear);
-        request.setAttribute("reclassCd",classnum);
-        request.setAttribute("resubjectCd",sub.getCd());
+        request.setAttribute("f1",entYear);
+        request.setAttribute("f2",classnum);
+        request.setAttribute("f3",sub.getCd());
         request.setAttribute("resubjectName",sub.getName());
         
         if (tescla != null && tescla.isEmpty()) {
