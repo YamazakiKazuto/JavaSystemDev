@@ -1,3 +1,4 @@
+//制作者　勝見
 package scoremanager.main;
 
 import bean.Subject;

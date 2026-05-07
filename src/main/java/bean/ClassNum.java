@@ -1,3 +1,4 @@
+//制作者 山﨑
 package bean;
 
 import java.io.Serializable;

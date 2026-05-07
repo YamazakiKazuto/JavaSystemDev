@@ -1,3 +1,4 @@
+//制作者　内田
 package bean;
 
 import java.io.Serializable;

@@ -1,3 +1,4 @@
+//制作者　石川
 package scoremanager.main; // パッケージ名はご自身の環境に合わせてください
 
 import jakarta.servlet.http.HttpServletRequest;

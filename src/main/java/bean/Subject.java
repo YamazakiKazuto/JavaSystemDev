@@ -1,3 +1,4 @@
+//制作者　勝見
 package bean;
 
 import java.io.Serializable;

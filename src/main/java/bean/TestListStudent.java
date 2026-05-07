@@ -1,3 +1,4 @@
+//制作者　石川
 package bean;
 
 public class TestListStudent {

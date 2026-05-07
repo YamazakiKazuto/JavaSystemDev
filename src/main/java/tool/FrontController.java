@@ -1,3 +1,4 @@
+//制作者　石川
 package tool;
 
 import java.io.IOException;

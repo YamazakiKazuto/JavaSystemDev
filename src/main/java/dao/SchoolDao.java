@@ -1,3 +1,4 @@
+//制作者　石川
 package dao;
 
 import java.sql.Connection;

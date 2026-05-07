@@ -1,3 +1,4 @@
+//制作者 山﨑
 package scoremanager.main;
 
 import java.util.List;

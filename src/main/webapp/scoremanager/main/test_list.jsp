@@ -1,3 +1,4 @@
+<%--//制作者　石川 --%>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
