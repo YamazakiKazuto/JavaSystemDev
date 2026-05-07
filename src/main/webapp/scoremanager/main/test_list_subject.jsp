@@ -23,11 +23,15 @@
             <div class="col-2">
                 <label class="form-label">入学年度</label>
                 <select class="form-select" name="f1">
-                    <option value="">--------</option>
-                    <c:forEach var="year" items="${entyearset}">
-                        <option value="${year}">${year}</option>
-                    </c:forEach>
-                </select>
+    				<option value="">--------</option>
+    				<c:forEach var="year" items="${entyearset}">
+        				<option value="${year}"
+         	   				<c:if test="${year == return_year}">selected</c:if>>
+            				${year}
+        				</option>
+    				</c:forEach>
+				</select>
+                
             </div>
 
             <div class="col-2">
@@ -35,8 +39,11 @@
                 <select class="form-select" name="f2">
                     <option value="">--------</option>
                     <c:forEach var="cla" items="${classlist}">
-                        <option value="${cla}">${cla}</option>
-                    </c:forEach>
+        				<option value="${cla}"
+         	   				<c:if test="${cla == return_cla}">selected</c:if>>
+            				${cla}
+        				</option>
+    				</c:forEach>
                 </select>
             </div>
 
@@ -45,8 +52,11 @@
                 <select class="form-select" name="f3">
                     <option value="">--------</option>
                     <c:forEach var="subject" items="${subjectlist}">
-                        <option value="${subject.cd}">${subject.name}</option>
-                    </c:forEach>
+        				<option value="${subject.cd}"
+         	   				<c:if test="${subject.cd == return_sub}">selected</c:if>>
+            				${subject.name}
+        				</option>
+    				</c:forEach>
                 </select>
             </div>
 

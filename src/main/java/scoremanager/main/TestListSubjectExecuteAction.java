@@ -49,9 +49,9 @@ public class TestListSubjectExecuteAction extends Action {
         SubjectDao dao = new SubjectDao();
         Subject sub = dao.get(subjectCd,user.getSchool());
         request.setAttribute("subjectone",sub);
-        request.setAttribute("f1",entYear);
-        request.setAttribute("f2",classnum);
-        request.setAttribute("f3",sub.getCd());
+        request.setAttribute("return_year",entYear);
+        request.setAttribute("return_cla",classnum);
+        request.setAttribute("return_sub",sub.getCd());
         request.setAttribute("resubjectName",sub.getName());
         
         if (tescla != null && tescla.isEmpty()) {
