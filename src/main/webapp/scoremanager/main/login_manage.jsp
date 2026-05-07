@@ -49,9 +49,6 @@
                         </c:forEach>
                     </tbody>
                 </table>
-                <div class="mt-4">
-                    <a href="Menu.action">メニュー画面へ戻る</a>
-                </div>
             </div>
         </section>
     </c:param>

@@ -11,8 +11,7 @@
             
             <p style="margin-bottom:30px;">
                 エラーが発生しました
-            </p>
- 
+            </p> 
  
         </section>
     </c:param>

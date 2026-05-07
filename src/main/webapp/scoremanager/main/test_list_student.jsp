@@ -112,6 +112,7 @@
         <th>科目コード</th>
         <th>回数</th>
         <th>点数</th>
+        <th>操作</th>
     </tr>
 
     <c:forEach var="t" items="${tesstu}">
@@ -120,6 +121,8 @@
             <td>${t.subjectCd}</td>
             <td>${t.num}</td>
             <td>${t.point}</td>
+            <td><a href="TestDelete.action?no=${studentone.no}&subCd=${t.subjectCd}&num=${t.num}">削除</a></td>
+            
         </tr>
     </c:forEach>
 </table>

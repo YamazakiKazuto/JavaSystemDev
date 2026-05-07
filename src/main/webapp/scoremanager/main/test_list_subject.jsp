@@ -118,6 +118,7 @@
         <th>氏名</th>
         <th>１回</th>
         <th>２回</th>
+        <th>操作</th>
         </tr>
 
         <c:forEach var="t" items="${tescla}">
@@ -132,17 +133,21 @@
             <!-- 2回目の点数を探す -->
             <td>
                 <c:set var="second" value="-" />
-
+				<c:set var="deleteNo" value="${t.no}" />
+				
                 <c:forEach var="u" items="${tescla}">
                     <c:if test="${u.student.no == t.student.no 
                                  and u.classNum == t.classNum
                                  and u.no == 2}">
+                         <c:set var="deleteNo" value="${u.no}" />
                         <c:set var="second" value="${u.point}" />
                     </c:if>
                 </c:forEach>
 
                 ${second}
             </td>
+            <td><a href="TestDelete.action?no=${t.student.no}&subCd=${subjectone.cd}&num=${deleteNo}">削除</a></td>
+
         </tr>
     </c:if>
 </c:forEach>

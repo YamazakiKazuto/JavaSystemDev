@@ -4,6 +4,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -183,6 +184,30 @@ public class TestDao extends Dao {
         	ps.setInt(6, test.getNo());
  
             return ps.executeUpdate() == 1;
+        }
+    }
+    public boolean delete(Test test,School school) throws Exception {
+        Connection connection = getConnection();
+        PreparedStatement statement = null;
+        String sql = "delete from test where student_no = ? and subject_cd = ? and no=? and school_cd=?";
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, test.getStudent().getNo());
+            statement.setString(2, test.getSubject().getCd());
+            statement.setInt(3, test.getNo());
+            statement.setString(4, school.getCd());
+            int result = statement.executeUpdate();
+            return result > 0;
+ 
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            if (statement != null) {
+                try { statement.close(); } catch (SQLException sqle) { throw sqle; }
+            }
+            if (connection != null) {
+                try { connection.close(); } catch (SQLException sqle) { throw sqle; }
+            }
         }
     }
 }
