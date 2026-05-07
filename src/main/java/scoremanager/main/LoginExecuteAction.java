@@ -18,7 +18,7 @@ public class LoginExecuteAction extends Action {
    			String id=request.getParameter("id");
    			String password=request.getParameter("password");
    			TeacherDao dao=new TeacherDao();
-  			Teacher user=dao.search(id, password);
+  			Teacher user=dao.login(id, password);
    			
    			if (user!=null) {
    				//セッション属性に顧客Beanを保存

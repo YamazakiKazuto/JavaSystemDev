@@ -55,16 +55,22 @@ public class TestRegistAction extends Action {
             if (errors.isEmpty()) {
                 try {
                     TestDao tDao = new TestDao();
-                    Subject subject = new Subject();
-                    subject.setCd(subjectCode);
+                    Subject sub = new Subject();
+                    sub.setCd(subjectCode);
 
-                    List<Test> tests = tDao.filter(Integer.parseInt(entYearStr), classNum, subject, Integer.parseInt(noStr), school);
+                    List<Test> tests = tDao.filter(Integer.parseInt(entYearStr), classNum, sub, Integer.parseInt(noStr), school);
+
+                    session.setAttribute("tests", tests);
+                    session.setAttribute("ent_year", entYearStr);
+                    session.setAttribute("class_num", classNum);;
+                    session.setAttribute("no", noStr);
                     
-                    request.setAttribute("tests", tests);
-                    request.setAttribute("ent_year", entYearStr);
-                    request.setAttribute("class_num", classNum);
-                    request.setAttribute("subject_code", subjectCode);
-                    request.setAttribute("no", noStr);
+                    School school_cd = user.getSchool();
+                    SubjectDao subdao = new SubjectDao();
+                    Subject subject = subdao.get(subjectCode,school_cd);
+                    session.setAttribute("subject", subject);
+                    session.setAttribute("subject_code", subjectCode);
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -81,19 +87,18 @@ public class TestRegistAction extends Action {
             for (int i = currentYear - 10; i <= currentYear; i++) {
                 entYears.add(i);
             }
-            request.setAttribute("ent_years", entYears);
+            session.setAttribute("ent_years", entYears);
 
             // クラス一覧 (DAOがSchoolオブジェクトを受け取る形式)
             ClassNumDao cDao = new ClassNumDao();
             List<String> classNums = cDao.filter(school); // Stringのリストとして取得
-            request.setAttribute("class_nums", classNums);
+            session.setAttribute("class_nums", classNums);
 
             // 科目一覧
             SubjectDao sDao = new SubjectDao();
             List<Subject> subjects = sDao.filter(school); 
-            request.setAttribute("subjects", subjects);
-            System.out.println(classNums);
-            System.out.println("schoolCd=" + schoolCd);
+            session.setAttribute("subjects", subjects);
+
             
             
 

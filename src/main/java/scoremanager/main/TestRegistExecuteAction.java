@@ -22,29 +22,45 @@ public class TestRegistExecuteAction extends Action { // 重要：Actionを継�
         request.setCharacterEncoding("UTF-8");
         TestDao tDao = new TestDao();
         
+        
         String[] studentNos = request.getParameterValues("student_no");
         String[] points = request.getParameterValues("point");
-        String entYear = request.getParameter("ent_year");
         String classNum = request.getParameter("class_num");
         String subjectCode = request.getParameter("subject_code");
         String noStr = request.getParameter("no");
 
         List<Test> testList = new ArrayList<>();
-        List<String> errors = new ArrayList<>();
         
         HttpSession session = request.getSession();
+        List<Test> tests = (List<Test>) session.getAttribute("tests");
+        List<String> studentNames = new ArrayList<>();
+
+        for (Test test : tests) {
+            studentNames.add(test.getStudent().getName());
+        }
+
+        
         Teacher user = (Teacher) session.getAttribute("user");
         School school = new School();
         school.setCd(user.getSchool().getCd());
 
+        int count=0;
         if (points != null) {
             for (int i = 0; i < points.length; i++) { // 配列なので .length を使用
-                int point = Integer.parseInt(points[i]);
-                
+                int point = Integer.parseInt(points[i]);                
 
                 Test test = new Test();
+                
+                if (point < 0 || point > 100) {
+            		test.setJudgePoint(true);
+            		request.setAttribute("error","0〜100の範囲で入力してください");
+            		count++;
+            		System.out.println(count);
+            	}
+                
                 Student student = new Student();
                 student.setNo(studentNos[i]);
+                student.setName(studentNames.get(i));
                 test.setStudent(student);
                 
                 Subject subject = new Subject();
@@ -59,15 +75,21 @@ public class TestRegistExecuteAction extends Action { // 重要：Actionを継�
                 testList.add(test);
             }
         }
-
-        if (!errors.isEmpty()) {
-            request.setAttribute("errors", errors);
-            // エラー時は検索画面のロジックを再実行
-            new TestRegistAction().execute(request, response);
-            return;
+        if (count != 0) {
+        	session.setAttribute("tests",testList);
+        	request.getRequestDispatcher("test_regist.jsp").forward(request, response);
+        	return;
         }
-
         tDao.save(testList);
+        session.removeAttribute("tests");
+        session.removeAttribute("ent_year");
+        session.removeAttribute("class_num");
+        session.removeAttribute("no");
+        session.removeAttribute("subject");
+        session.removeAttribute("subject_code");
+        session.removeAttribute("ent_years");
+        session.removeAttribute("class_nums");
+        session.removeAttribute("subjects");
         request.getRequestDispatcher("test_regist_done.jsp").forward(request, response);
     }
 }

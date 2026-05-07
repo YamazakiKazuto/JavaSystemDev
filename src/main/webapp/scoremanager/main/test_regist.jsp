@@ -86,20 +86,20 @@
 
 
 </form>
+</div>
 
-<!-- 件数表示 -->
 
-<c:if test="${tests != null}"> <p>件数：${fn:length(tests)}</p>
+<c:if test="${subject != null}"> 
+<div>科目：${subject.name}（${no}回）</div>
 </c:if>
 
 <!-- 成績入力テーブル -->
 
-<c:if test="${tests != null}">
+<c:if test="${not empty tests}">
 
 <form action="TestRegistExecute.action" method="post">
 
 
-<input type="hidden" name="ent_year" value="${ent_year}">
 <input type="hidden" name="class_num" value="${class_num}">
 <input type="hidden" name="subject_code" value="${subject_code}">
 <input type="hidden" name="no" value="${no}">
@@ -128,15 +128,10 @@
                 <td>${t.student.name}</td>
 
                 <td>
-                    <input type="number"
-                           name="point"
-                           value="${t.point}"
-                           class="form-control"
-                           min="0" max="100"
-           				   required          				   
-						   oninvalid="this.setCustomValidity('0～100の値で入力してください')"
-           				   oninput="this.setCustomValidity('')">
-           				                         
+                    <input type="number" name="point" value="${t.point}" class="form-control" required>             				                         
+                	<c:if test="${t.judgePoint == true}"> 
+						<div class="text-warning">${error }</div>
+					</c:if>
                 </td>
             </tr>
         </c:forEach>
@@ -144,8 +139,7 @@
 </table>
 
 <div class="mt-3">
-    <button type="submit" class="btn btn-success">登録して終了</button>
-    <a href="menu.jsp" class="btn btn-secondary">戻る</a>
+    <button type="submit" class="btn btn-secondary">登録して終了</button>
 </div>
 
 </form>
@@ -153,8 +147,8 @@
 
 <!-- データなし -->
 
-<c:if test="${tests != null and empty tests}"> <div class="alert alert-warning mt-3">
-該当する学生が見つかりません </div>
+<c:if test="${tests != null and empty tests}"> 
+<div class="alert alert-warning mt-3">該当する学生が見つかりません </div>
 </c:if>
 
 </c:param>

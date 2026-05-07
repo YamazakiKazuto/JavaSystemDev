@@ -62,6 +62,7 @@ public class TestDao extends Dao {
  
             Student student = new Student();
             student.setNo(rSet.getString("student_no"));
+            student.setName(rSet.getString("student_name"));
             test.setStudent(student);
             test.setClassNum(rSet.getString("class_num"));
             Subject subject = new Subject();
@@ -86,7 +87,7 @@ public class TestDao extends Dao {
         Connection con = getConnection();
  
         String sql =
-            "select s.no as student_no, s.name, s.class_num, " +
+            "select s.no as student_no, s.name as student_name, s.class_num, " +
             "t.no as test_no, t.point, t.subject_cd " +
             "from student s " +
             "left join test t on s.no = t.student_no " +
@@ -109,35 +110,7 @@ public class TestDao extends Dao {
  
         ResultSet rs = ps.executeQuery();
  
-        while (rs.next()) {
-            Test test = new Test();
- 
-            // 学生
-            Student student = new Student();
-            student.setNo(rs.getString("student_no"));
-            student.setName(rs.getString("name")); // ← 重要
-            test.setStudent(student);
- 
-            test.setClassNum(rs.getString("class_num"));
- 
-            // 科目
-            test.setSubject(subject);
- 
-            test.setSchool(school);
- 
-            // 回数
-            test.setNo(num);
- 
-            // 点数（null対策）
-            int point = rs.getInt("point");
-            if (rs.wasNull()) {
-                test.setPoint(0); // 空扱い
-            } else {
-                test.setPoint(point);
-            }
- 
-            list.add(test);
-        }
+        list = postFilter(rs, school);
  
         rs.close();
         ps.close();

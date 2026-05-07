@@ -8,6 +8,7 @@ public class Test {
     private School school;
     private int no;
     private int point;
+    private boolean judgepoint;
 
 
 
@@ -57,5 +58,12 @@ public class Test {
 
     public void setPoint(int point) {
         this.point = point;
+    }
+    public boolean getJudgePoint() {
+        return judgepoint;
+    }
+
+    public void setJudgePoint(boolean judge) {
+        this.judgepoint = judge;
     }
 }
