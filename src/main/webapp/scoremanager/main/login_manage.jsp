@@ -7,13 +7,15 @@
 
     <c:param name="content">
         <section class="me-4">
-            <h2 class="h3 mb-3 fw-normal bg-secondary bg-opacity-10 py-2 px-4">ログイン管理</h2>
+            <h2 class="h3 mb-3 fw-normal bg-secondary bg-opacity-10 py-2 px-4">教員管理</h2>
             
             <div class="d-flex justify-content-between align-items-center mb-3 px-4">
                 <div class="fs-5">教員一覧</div>
-                <div>
-                    <a href="TeacherCreate.action" class="btn btn-outline-primary btn-sm">新規登録</a>
-                </div>
+                <c:if test="${user.mode.role == '1' or user.mode.role == '2'}">
+                	<div>
+                    	<a href="TeacherCreate.action" class="btn btn-outline-primary btn-sm">新規登録</a>
+                	</div>
+                </c:if>
             </div>
 
             <div class="px-4">
@@ -23,6 +25,7 @@
                             <th>教員ID</th>
                             <th>氏名</th>
                             <th>所属学校</th>
+                            <th>役職</th>
                             <th class="text-center">操作</th>
                         </tr>
                     </thead>
@@ -32,6 +35,7 @@
                                 <td>${teacher.id}</td>
                                 <td>${teacher.name}</td>
                                 <td>${teacher.school.cd}</td>
+                                <td>${teacher.role.name}</td>
                                 <td class="text-center">
                                     <c:choose>
                                         <%-- ログイン中のユーザー（自分）の場合 --%>
@@ -39,10 +43,15 @@
                                             <span class="text-muted small">ログイン中</span>
                                             <a href="TeacherUpdate.action" class="ms-2 text-primary text-decoration-underline">変更</a>
                                         </c:when>
-                                        <%-- 自分以外の場合 --%>
-                                        <c:otherwise>
-                                            <a href="TeacherDelete.action?id=${teacher.id}" class="text-primary text-decoration-underline">削除</a>
-                                        </c:otherwise>
+                                        
+                                        <c:when test="${user.mode.role == '1' or user.mode.role == '2'}">
+                                        	<c:if test="${(teacher.role.role != '1') or (user.mode.role == '1')}">
+                                            	<a href="TeacherRoleUpdate.action?teacher_id=${teacher.id}" class="text-primary text-decoration-underline">役職の変更</a>	
+	                                            <a href="TeacherDelete.action?id=${teacher.id}" class="text-primary text-decoration-underline"  style="margin-left: 30px;">削除</a>
+	                                        </c:if>
+                                        </c:when>
+                                        
+                                        <c:otherwise>  </c:otherwise>
                                     </c:choose>
                                 </td>
                             </tr>

@@ -12,7 +12,17 @@
             <p style="margin-bottom:30px;">
                 エラーが発生しました
             </p> 
- 
+ 			<p><strong>メッセージ：</strong> ${errorMessage}</p>
+
+<pre>
+<%
+    // スタックトレースを表示したい場合
+    Exception ex = (Exception) request.getAttribute("errorMessage");
+    if (ex != null) {
+        ex.printStackTrace(new java.io.PrintWriter(out));
+    }
+%>
+</pre>
         </section>
     </c:param>
 </c:import>

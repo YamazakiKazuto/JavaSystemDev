@@ -16,8 +16,33 @@
 
 <c:param name="content">
     <section class="me-4">
-        <h2 class="h3 mb-3 fw-normal bg-secondary bg-opacity-10 py-2 px-4">メニュー</h2>
+        <h2 class="h3 mb-3 fw-normal bg-secondary bg-opacity-10 py-2 px-4">
+        メニュー
+        
+        <form action="ModeChange.action" method="post">
+        <select class="form-select" id="student-f1-select" name="role_num">
 
+        <c:forEach var="role" items="${role_list}">
+        <option value="${role.role}" <c:if test="${user.mode.role==role.role}">selected</c:if>>${role.name}モード</option>
+        </c:forEach>
+    	</select>
+    	<button type="submit" class="btn btn-secondary">モード変更</button>
+    	</form>
+        </h2>
+
+	<c:if test="${not empty mode_changed}"> 
+	<label style="color:#0dcaf0;">
+		<p>${mode_changed }</p>
+	</label>
+	</c:if>
+	<c:if test="${not empty becareful}"> 
+	<div class="alert alert-danger">
+	${becareful}
+	<p>気を付けて操作を行ってください</p>
+	</div>
+	</c:if>
+	
+	
         <div class="row text-center px-4 fs-3 my-5">
 
             <div class="col d-flex align-items-center justify-content-center mx-2 rounded shadow"

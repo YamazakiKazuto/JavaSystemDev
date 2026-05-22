@@ -1,7 +1,11 @@
 //制作者　内田
 package scoremanager.main;
 
+import java.util.List;
+
+import bean.Role;
 import bean.Teacher;
+import dao.RoleDao;
 import dao.TeacherDao;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -14,16 +18,18 @@ public class TeacherCreateExecuteAction extends Action {
         // セッションからログインユーザー情報を取得（学校コード利用のため）
         HttpSession session = request.getSession();
         Teacher user = (Teacher) session.getAttribute("user");
-
         // リクエストパラメータの取得
         String id = request.getParameter("id");
         String name = request.getParameter("name");
         String password = request.getParameter("password");
+        String role_num = request.getParameter("role_num");
+
+        RoleDao rDao = new RoleDao();
+        Role role = rDao.get(role_num); 
 
         TeacherDao tDao = new TeacherDao();
         // 1. IDの重複チェック
         Teacher check = tDao.get(id);
-
         if (check == null) {
             // 2. 重複がなければ新しい教員Beanを作成して保存
             Teacher newTeacher = new Teacher();
@@ -31,12 +37,13 @@ public class TeacherCreateExecuteAction extends Action {
             newTeacher.setName(name);
             newTeacher.setPassword(password);
             newTeacher.setSchool(user.getSchool()); // ログインユーザーと同じ学校をセット
-
+            newTeacher.setRole(role);
             // データベースに保存
-            tDao.save(newTeacher);
+            tDao.save(newTeacher,role);
+
             
             // 登録完了後、一覧画面へリダイレクト
-            response.sendRedirect("LoginManage.action");
+            response.sendRedirect("teacher_create_done.jsp");
         } else {
             // 3. IDが重複している場合のエラー処理
             // エラーメッセージをリクエスト属性にセット
@@ -45,6 +52,11 @@ public class TeacherCreateExecuteAction extends Action {
             // 入力内容を保持するためにリクエストに値を残す（任意）
             request.setAttribute("id", id);
             request.setAttribute("name", name);
+            
+            TeacherDao dao=new TeacherDao();
+    		List<Role> Role_list=dao.modelistget(user.getRole().getRole());
+    		request.setAttribute("role_list", Role_list);
+    		request.setAttribute("role_num", role_num);
             
             // 登録画面（teacher_create.jsp）にフォワードして戻る
             request.getRequestDispatcher("teacher_create.jsp").forward(request, response);

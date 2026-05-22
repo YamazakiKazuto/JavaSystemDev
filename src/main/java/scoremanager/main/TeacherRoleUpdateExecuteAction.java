@@ -10,39 +10,24 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import tool.Action;
 
-public class TeacherUpdateExecuteAction extends Action {
+public class TeacherRoleUpdateExecuteAction extends Action {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         HttpSession session = request.getSession();
         Teacher user = (Teacher) session.getAttribute("user");
 
-        String oldId = user.getId();
-        String newId = request.getParameter("id");
-        String name = request.getParameter("name");
-        String password = request.getParameter("password");
+        String teacher_id = request.getParameter("id");
         String role_num = request.getParameter("role_num");
         
         RoleDao rDao = new RoleDao();
         Role role = rDao.get(role_num); 
 
         TeacherDao tDao = new TeacherDao();
+        Teacher teacher =tDao.get(teacher_id);
+        
+        teacher.setRole(role);
 
-        if (!oldId.equals(newId)) {
-            if (tDao.get(newId) != null) {
-                request.setAttribute("error", "その教員IDは既に使用されています。");
-                request.getRequestDispatcher("teacher_update.jsp").forward(request, response);
-                return;
-            }
-            tDao.delete(oldId);
-        }
-
-        user.setId(newId);
-        user.setName(name);
-        if (password != null && !password.isEmpty()) {
-            user.setPassword(password);
-        }
-
-        tDao.save(user,role);
+        tDao.save(teacher,role);
         session.setAttribute("user", user);
 
         response.sendRedirect("teacher_update_done.jsp");

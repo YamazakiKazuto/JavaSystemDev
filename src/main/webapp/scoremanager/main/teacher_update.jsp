@@ -16,8 +16,8 @@
             <form action="TeacherUpdateExecute.action" method="post" class="px-4">
                 <div class="mb-3 w-50">
                     <label class="form-label">教員ID</label>
-                    <input type="text" name="id" class="form-control" value="${user.id}" required>
-                    <div class="form-text">※IDを変更すると次回から新しいIDでログインが必要です。</div>
+					<p>　${user.id}</p>
+                    <input type="hidden" name="id" value="${user.id}" required>
                 </div>
 
                 <div class="mb-3 w-50">
@@ -30,7 +30,7 @@
                     <%-- 入力欄の背景色を画像に合わせて調整 --%>
                     <input type="password" name="password" id="passwordInput" 
                            class="form-control mb-2" style="background-color: #e9f0fe;" 
-                           placeholder="変更する場合のみ入力">
+                           placeholder="変更する場合のみ入力" required>
                     
                     <%-- ★ボタンからチェックボックスに変更 --%>
                     <div class="form-check">
@@ -39,6 +39,8 @@
                             パスワードを表示
                         </label>
                     </div>
+
+                    
                 </div>
 
                 <div class="mt-4">

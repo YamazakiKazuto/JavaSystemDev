@@ -2,7 +2,6 @@ package dao;
  
 import java.sql.Connection;
 
-import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
  
@@ -12,12 +11,15 @@ public class Dao {
  
     static {
         try {
-            Context context = new InitialContext();
-            ds = (DataSource) context.lookup("java:/comp/env/jdbc/test2");
+            InitialContext context = new InitialContext();
+            ds = (DataSource) context.lookup("java:/comp/env/jdbc/javasystemdev");   
         } catch (Exception e) {
-            e.printStackTrace();
+            // スタックトレースを必ず出力させて原因を特定する
+            e.printStackTrace(); 
+
         }
     }
+    
  
     public Connection getConnection() throws Exception {
         // データベースへのコネクションを返却

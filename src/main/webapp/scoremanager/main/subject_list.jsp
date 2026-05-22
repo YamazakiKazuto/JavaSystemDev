@@ -11,7 +11,14 @@
             <h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">科目管理</h2>
             
             <div class="my-2 text-end px-4">
-                <a href="SubjectCreate.action">新規登録</a>
+            <c:choose>
+            	 <c:when test="${user.mode.role == '1' or user.mode.role == '4'}">
+    			 	<a href="SubjectCreate.action">新規登録</a>	
+    			 </c:when>
+							            
+                 <c:otherwise>  </c:otherwise>
+            </c:choose>
+                
             </div>
             
             <%-- テーブル：Bootstrapのクラスを適用 --%>
@@ -27,9 +34,15 @@
                 <tr>
                 	<td>${subject.cd}</td>
                     <td>${subject.name}</td>
-                    <td>
-                    	<a href="SubjectUpdate.action?cd=${subject.cd}">変更</a>
-                        <a href="SubjectDelete.action?cd=${subject.cd}"style="margin-left: 15px;">削除</a>
+                    <td><c:choose>
+                            <c:when test="${user.mode.role == '1' or user.mode.role == '4'}">
+    							<a href="SubjectUpdate.action?cd=${subject.cd}">変更</a>
+                        		<a href="SubjectDelete.action?cd=${subject.cd}"style="margin-left: 15px;">削除</a>		
+							</c:when>
+							            
+                            <c:otherwise>  </c:otherwise>
+                            </c:choose>
+                    	
                     </td>
                 </tr>
                 </c:forEach>

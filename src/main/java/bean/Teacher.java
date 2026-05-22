@@ -16,7 +16,10 @@ public class Teacher extends User implements Serializable {
 
     // 学校
     private School school;
+
+    private Role role;
     
+    private Role mode;
 
     public String getId() {
         return id;
@@ -48,5 +51,19 @@ public class Teacher extends User implements Serializable {
 
     public void setSchool(School school) {
         this.school = school;
+    }
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+    public Role getMode() {
+        return mode;
+    }
+
+    public void setMode(Role mode) {
+        this.mode = mode;
     }
 }

@@ -32,9 +32,9 @@ ${param.scripts}
     <!-- メインレイアウト -->
     <div class="row">
     	<c:choose>
-		<c:when test="${not empty user}">   
+		<c:when test="${not empty user }">   
         <!-- 左メニュー -->
-        	<aside class="col-3 sidebar">
+        	<aside class="col-2 sidebar">
     			<p><a href="Menu.action">メニュー画面</a></p>
 	            <p><a href="StudentList.action">学生管理</a></p>
     	        <p>成績管理</p>
@@ -46,13 +46,14 @@ ${param.scripts}
     		</aside>
 
         <!-- 右コンテンツ -->
-        <main class="col-9 border-start">
+        <main class="col-10 border-start">
         	${param.content}
         </main>
         </c:when>
         <c:otherwise>
-        	<main class="col-12">
-        		${param.content}
+        
+        <main class="col-12">
+        	${param.content}
         </c:otherwise>
 		</c:choose>
     </div>

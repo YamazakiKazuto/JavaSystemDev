@@ -14,10 +14,12 @@ public class ClassCountsAction extends Action {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         HttpSession session = request.getSession();
-        Teacher teacher = (Teacher) session.getAttribute("user");
+        Teacher user = (Teacher) session.getAttribute("user");
 
         ClassNumDao cDao = new ClassNumDao();
-        Map<String, Integer> counts = cDao.countStudentsByClass(teacher.getSchool());
+        Map<String, Integer> counts = cDao.countStudentsByClass(user.getSchool());
+        
+        System.out.println(user.getMode().getRole());
 
         request.setAttribute("classCounts", counts);
         request.getRequestDispatcher("class_counts.jsp").forward(request, response);

@@ -7,7 +7,8 @@
 </div>
 <c:if test="${not empty user}">
 	<div class="nav align-self-end">
-		<span class="nav-item px-2">${user.getName()}様</span>
+		<span class="nav-item px-2">役職モード：${user.getMode().getName()}</span>
+		<span class="nav-item px-2">　　${user.getName()}様</span>
 		<a class="nav-item px-2" href="Logout.action">ログアウト</a>
 	</div>
 </c:if>

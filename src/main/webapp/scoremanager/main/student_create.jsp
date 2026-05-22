@@ -29,7 +29,7 @@
         <%-- 現在のyearと選択されていたf1が一致していた場合selectedを追記 --%>
         	<option value="${year}" <c:if test="${year==f1}">selected</c:if>>${year}</option>
         </c:forEach>
-        </select>
+    </select>
 </div>
 
 <c:if test="${not empty ent_year_error}">

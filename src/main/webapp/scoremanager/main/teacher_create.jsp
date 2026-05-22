@@ -35,10 +35,29 @@
                 <div class="mb-3 w-50">
                     <label class="form-label">パスワード</label>
                     <%-- セキュリティ上、パスワードは保持させないのが一般的です --%>
-                    <input type="password" name="password" class="form-control" 
+                    <input type="password" name="password" id="password" class="form-control" 
                            maxlength="30" required>
                 </div>
-
+				
+				<div class="form-check mb-3 d-flex">
+                    <input class="form-check-input"
+                           type="checkbox"
+                           id="showPassword"
+                           onclick="togglePassword()">
+                    <label class="form-check-label" for="showPassword">
+                        パスワードを表示
+                    </label>
+                </div>
+                
+				<div class="mb-3">
+    				<label class="form-label">役職</label>
+    				<select name="role_num" class="form-control">
+        			<c:forEach var="role" items="${role_list}">
+        				<option value="${role.role}" <c:if test="${not empty role_num}">selected</c:if>>${role.name}</option>
+        			</c:forEach>
+    				</select>
+				</div>
+				
                 <div class="mt-4">
                     <button type="submit" class="btn btn-primary">登録</button>
                 </div>
@@ -48,5 +67,11 @@
                 </div>
             </form>
         </section>
+<script>
+function togglePassword() {
+    const pw = document.getElementById("password");
+    pw.type = pw.type === "password" ? "text" : "password";
+}
+</script>
     </c:param>
 </c:import>
